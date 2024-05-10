@@ -1,0 +1,16 @@
+.calendarsContainer {
+  .months {
+    span {
+    }
+    span.before {
+    }
+    span.curMonth {
+    }
+    span.nextMonth {
+    }
+    span.after {
+    }
+  }
+  .calendars {
+  }
+}
