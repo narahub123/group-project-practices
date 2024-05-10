@@ -1,16 +1,42 @@
 .calendarsContainer {
-  .months {
-    span {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  .container {
+    .months {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      nav {
+        padding: 30px;
+        color: grey;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      nav:hover {
+        font-size: 18px;
+        color: rgb(95, 95, 95);
+      }
+
+      span {
+        padding: 30px;
+      }
+
+      nav.before {
+      }
+      span.curMonth {
+        padding-top: 25px;
+      }
+      span.nextMonth {
+        padding-top: 25px;
+      }
+      nav.after {
+      }
     }
-    span.before {
+    .calendars {
+      display: flex;
     }
-    span.curMonth {
-    }
-    span.nextMonth {
-    }
-    span.after {
-    }
-  }
-  .calendars {
   }
 }
