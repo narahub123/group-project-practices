@@ -50,8 +50,8 @@ const CalendarsContainer = () => {
           </nav>
         </div>
         <div className="calendars">
-          <Calendar />
-          <Calendar />
+          <Calendar date={dates[0]} />
+          <Calendar date={dates[1]} />
         </div>
       </div>
     </div>

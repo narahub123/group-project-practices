@@ -1,6 +1,45 @@
-.calendar {
+.calender {
+  padding: 20px;
   thead {
+    tr {
+      td {
+        text-align: center;
+        padding: 10px;
+      }
+    }
   }
+
   tbody {
+    tr {
+      td {
+        /* padding: 10px; */
+        text-align: center;
+
+        .date {
+          cursor: pointer;
+          width: 20px;
+          padding: 10px;
+          border-radius: 5px;
+        }
+
+        .date:hover {
+          background-color: gray;
+          color: white;
+        }
+        .date:active {
+          background-color: black;
+        }
+
+        .active {
+          background-color: black;
+          color: white;
+        }
+
+        .possible {
+          background-color: gray;
+          color: white;
+        }
+      }
+    }
   }
 }
