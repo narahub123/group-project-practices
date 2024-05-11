@@ -3,8 +3,8 @@ import "./calendar.css";
 
 const Calendar = ({ date }) => {
   const [isActive, setIsActive] = useState(false);
-  const [id, setId] = useState("");
-  const [className, setClassName] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
 
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -30,12 +30,20 @@ const Calendar = ({ date }) => {
 
   const handleClick = (e) => {
     const date = e.currentTarget.id;
+    const className = e.currentTarget.className;
+    console.log(className);
+    if (className === "date possible") {
+      setEnd(date);
+      return;
+    }
     const newDate = new Date(year, month - 1, date);
-    setId(date);
+    setStart(date);
     setIsActive(true);
+    setEnd("");
     console.log(newDate);
   };
 
+  console.log(end);
   return (
     <table className="calender">
       <thead className="days">
@@ -70,13 +78,21 @@ const Calendar = ({ date }) => {
                         <div
                           key={i}
                           className={
-                            date <= i && id === String(date) && isActive
+                            date <= i && start === String(date) && isActive
                               ? "date active start"
-                              : i > Number(id) &&
-                                Number(id) !== 0 &&
-                                Number(id) < date &&
-                                date < Number(id) + 10
+                              : i > Number(start) &&
+                                Number(start) !== 0 &&
+                                Number(start) < date &&
+                                end === "" &&
+                                date < Number(start) + 10
                               ? "date possible"
+                              : i > Number(start) &&
+                                Number(start) !== 0 &&
+                                Number(start) < date &&
+                                date < Number(start) + 10 &&
+                                end !== "" &&
+                                date <= Number(end)
+                              ? "date active end"
                               : firstDayOfMonth > i
                               ? "formerMonth"
                               : "date"
