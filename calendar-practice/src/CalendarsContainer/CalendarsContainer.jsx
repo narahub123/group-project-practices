@@ -2,14 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./calendarsContainer.css";
 import Calendar from "./Calendar/Calendar";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import Calendars from "./Calendars/Calendars";
 
 const CalendarsContainer = () => {
   const [date, setDate] = useState(new Date());
   const [dates, setDates] = useState([
-    new Date(),
-    new Date(new Date().setMonth(new Date().getMonth() + 1)),
+    new Date(new Date().setHours(0, 0, 0, 0)),
+    new Date(
+      new Date(new Date().setMonth(new Date().getMonth() + 1)).setHours(
+        0,
+        0,
+        0,
+        0
+      )
+    ),
   ]);
 
+  console.log(dates);
   const year = dates[0].getFullYear();
   const month = dates[0].getMonth() + 1;
 
@@ -49,10 +58,7 @@ const CalendarsContainer = () => {
             <LuChevronRight />
           </nav>
         </div>
-        <div className="calendars">
-          <Calendar date={dates[0]} />
-          <Calendar date={dates[1]} />
-        </div>
+        <Calendars dates={dates} />
       </div>
     </div>
   );

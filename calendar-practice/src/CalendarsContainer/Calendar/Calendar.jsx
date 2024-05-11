@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import "./calendar.css";
 
-const Calendar = ({ date }) => {
-  const [isActive, setIsActive] = useState(false);
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
-
+const Calendar = ({ date, start, setStart, end, setEnd }) => {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
+
+  const getDate = (date) => {
+    const newDate = new Date(year, month - 1, date);
+    newDate.setHours(0, 0, 0, 0);
+
+    return newDate;
+  };
+
   const lastDayOfMonth = new Date(year, month, 0).getDate();
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   const dates = [];
 
@@ -31,18 +38,19 @@ const Calendar = ({ date }) => {
   const handleClick = (e) => {
     const date = e.currentTarget.id;
     const className = e.currentTarget.className;
-    console.log(className);
+    const value = e.currentTarget.getAttribute("aria-label");
+    console.log(new Date(year, month - 1, date));
     if (className === "date possible") {
-      setEnd(date);
+      setEnd(getDate(date));
       return;
     }
-    const newDate = new Date(year, month - 1, date);
-    setStart(date);
-    setIsActive(true);
+    // const newDate = new Date(year, month - 1, date);
+    setStart(getDate(date));
     setEnd("");
-    console.log(newDate);
+    // console.log(newDate);
   };
 
+  console.log(start);
   console.log(end);
   return (
     <table className="calender">
@@ -78,26 +86,45 @@ const Calendar = ({ date }) => {
                         <div
                           key={i}
                           className={
-                            date <= i && start === String(date) && isActive
-                              ? "date active start"
-                              : i > Number(start) &&
-                                Number(start) !== 0 &&
-                                Number(start) < date &&
+                            date <= i &&
+                            new Date(start).getTime() ===
+                              getDate(date).getTime()
+                              ? "date active"
+                              : date <= i &&
+                                start < getDate(date) &&
                                 end === "" &&
-                                date < Number(start) + 10
+                                getDate(date) <
+                                  new Date(
+                                    new Date(start).setDate(
+                                      new Date(start).getDate() + 10
+                                    )
+                                  )
                               ? "date possible"
-                              : i > Number(start) &&
-                                Number(start) !== 0 &&
-                                Number(start) < date &&
-                                date < Number(start) + 10 &&
+                              : date <= i &&
+                                start !== 0 &&
+                                start < getDate(date) &&
+                                getDate(date) <
+                                  new Date(
+                                    new Date(start).setDate(
+                                      new Date(start).getDate() + 10
+                                    )
+                                  ) &&
                                 end !== "" &&
-                                date <= Number(end)
-                              ? "date active end"
+                                getDate(date) <= end
+                              ? "date active"
                               : firstDayOfMonth > i
                               ? "formerMonth"
+                              : today.getTime() ===
+                                new Date(year, month - 1, date, 0).getTime()
+                              ? "date today"
                               : "date"
                           }
                           id={date}
+                          aria-label={
+                            firstDayOfMonth > date
+                              ? new Date(year, month - 1, date, 0)
+                              : new Date(year, month - 2, date, 0)
+                          }
                           onClick={
                             firstDayOfMonth <= i ? (e) => handleClick(e) : null
                           }
