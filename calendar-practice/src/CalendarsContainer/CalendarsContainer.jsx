@@ -5,6 +5,9 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import Calendars from "./Calendars/Calendars";
 
 const CalendarsContainer = () => {
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
   const [date, setDate] = useState(new Date());
   const [dates, setDates] = useState([
     new Date(new Date().setHours(0, 0, 0, 0)),
@@ -18,7 +21,7 @@ const CalendarsContainer = () => {
     ),
   ]);
 
-  console.log(dates);
+  console.log(start, end);
   const year = dates[0].getFullYear();
   const month = dates[0].getMonth() + 1;
 
@@ -45,6 +48,8 @@ const CalendarsContainer = () => {
     ]);
   };
 
+  console.log(selectedDates);
+
   return (
     <div className="calendarsContainer">
       <div className="container">
@@ -58,7 +63,14 @@ const CalendarsContainer = () => {
             <LuChevronRight />
           </nav>
         </div>
-        <Calendars dates={dates} />
+        <Calendars
+          dates={dates}
+          start={start}
+          setStart={setStart}
+          end={end}
+          setEnd={setEnd}
+          setSelectedDates={setSelectedDates}
+        />
       </div>
     </div>
   );

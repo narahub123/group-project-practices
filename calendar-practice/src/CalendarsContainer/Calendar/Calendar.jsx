@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./calendar.css";
 
-const Calendar = ({ date, start, setStart, end, setEnd }) => {
+const Calendar = ({ date, start, setStart, end, setEnd, setSelectedDates }) => {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
   const year = date.getFullYear();
@@ -36,22 +36,29 @@ const Calendar = ({ date, start, setStart, end, setEnd }) => {
   }
 
   const handleClick = (e) => {
-    const date = e.currentTarget.id;
+    const id = e.currentTarget.id;
+    const date = new Date(id).getDate();
+
     const className = e.currentTarget.className;
-    const value = e.currentTarget.getAttribute("aria-label");
-    console.log(new Date(year, month - 1, date));
+
     if (className === "date possible") {
       setEnd(getDate(date));
       return;
     }
-    // const newDate = new Date(year, month - 1, date);
+
     setStart(getDate(date));
     setEnd("");
-    // console.log(newDate);
   };
 
-  console.log(start);
-  console.log(end);
+  useEffect(() => {
+    const actives = document.getElementsByClassName("date active");
+    const arr = Object.values(actives);
+    // console.log(arr);
+
+    const selectedDates = arr.map((active) => new Date(active.id));
+    setSelectedDates(selectedDates);
+  }, [start, end]);
+
   return (
     <table className="calender">
       <thead className="days">
@@ -119,7 +126,7 @@ const Calendar = ({ date, start, setStart, end, setEnd }) => {
                               ? "date today"
                               : "date"
                           }
-                          id={date}
+                          id={getDate(date)}
                           aria-label={
                             firstDayOfMonth > date
                               ? new Date(year, month - 1, date, 0)

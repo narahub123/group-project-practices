@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import "./calendars.css";
 import Calendar from "../Calendar/Calendar";
 
-const Calendars = ({ dates }) => {
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
+const Calendars = ({
+  dates,
+  setSelectedDates,
+  start,
+  setStart,
+  end,
+  setEnd,
+}) => {
+  
 
   return (
     <div className="calendars">
@@ -14,6 +20,7 @@ const Calendars = ({ dates }) => {
         setStart={setStart}
         end={end}
         setEnd={setEnd}
+        setSelectedDates={setSelectedDates}
       />
       <Calendar
         date={dates[1]}
@@ -21,6 +28,7 @@ const Calendars = ({ dates }) => {
         setStart={setStart}
         end={end}
         setEnd={setEnd}
+        setSelectedDates={setSelectedDates}
       />
     </div>
   );
