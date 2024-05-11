@@ -1,0 +1,97 @@
+.playground {
+  display: flex;
+  height: 100vh;
+
+  .container {
+    padding: 10px;
+    width: 320px;
+    .selectedPlacesList {
+      h1 {
+        padding: 10px 0;
+      }
+      .placesList {
+        height: 100%;
+        background-color: rgba(128, 128, 128, 0.159);
+        border-radius: 10px;
+        ul {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          li {
+            margin: 20px 10px;
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            span {
+              padding: 3px;
+            }
+            span.image {
+              img {
+                width: 50px;
+                height: 50px;
+                border-radius: 5px;
+                border: 1px solid black;
+              }
+            }
+            span.detail {
+              p {
+              }
+              span.category {
+                color: red;
+                font-size: 14px;
+              }
+              span.addr {
+                font-size: 14px;
+              }
+            }
+            span.duplicate {
+              nav {
+                padding: 10px;
+                background-color: white;
+                border-radius: 5px;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .division {
+    border: 0.1px solid black;
+  }
+  .planKanban {
+    .container {
+      padding: 10px;
+      h1 {
+        padding: 10px 0;
+      }
+      .columnsContainer {
+        .columns {
+          display: flex;
+          flex-direction: row;
+
+          .column {
+            border-right: 1px solid black;
+            height: 100vh;
+            p {
+              text-align: center;
+              padding: 10px 0;
+              border-bottom: 1px solid black;
+            }
+            .placesContainer {
+              padding: 10px 0;
+              width: 320px;
+              .dropIndicator {
+              }
+              .place {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

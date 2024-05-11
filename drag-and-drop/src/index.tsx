@@ -1,8 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import Playground from "./components/playground/Playground";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(<React.StrictMode></React.StrictMode>);
+root.render(
+  <React.StrictMode>
+    <Playground />
+  </React.StrictMode>
+);
