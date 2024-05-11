@@ -1,5 +1,6 @@
 import React from "react";
 import "./playground.css";
+import SelectedPlaces from "./SelectedPlaces/SelectedPlaces";
 
 const Playground = () => {
   return (
@@ -7,43 +8,9 @@ const Playground = () => {
       <div className="container">
         <div className="selectedPlacesList">
           <h1>Selected Places</h1>
+          <SelectedPlaces />
           <div className="placesList">
-            <ul>
-              <li draggable>
-                <span className="image">
-                  <img src="" alt="img" />
-                </span>
-                <span className="detail">
-                  <p>
-                    <b>name</b>
-                  </p>
-                  <span className="category">
-                    <b>cate</b>
-                  </span>
-                  <span className="addr">Seoul Jong-ro Sejong-ro</span>
-                </span>
-                <span className="duplicate">
-                  <nav>+</nav>
-                </span>
-              </li>
-              <li draggable>
-                <span className="image">
-                  <img src="" alt="img" />
-                </span>
-                <span className="detail">
-                  <p>
-                    <b>name</b>
-                  </p>
-                  <span className="category">
-                    <b>cate</b>
-                  </span>
-                  <span className="addr">Seoul Jong-ro Sejong-ro</span>
-                </span>
-                <span className="duplicate">
-                  <nav>+</nav>
-                </span>
-              </li>
-            </ul>
+            <ul></ul>
           </div>
         </div>
       </div>
