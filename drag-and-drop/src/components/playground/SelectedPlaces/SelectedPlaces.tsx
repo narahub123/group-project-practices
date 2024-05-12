@@ -1,92 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./selectedPlaces.css";
-import SelectedPlace from "./SelectedPlace/SelectedPlace";
-import { selectedPlaces } from "../../../data/selectedPlaces";
+import SelectedPlace, {
+  SelectedPlaceType,
+} from "./SelectedPlace/SelectedPlace";
 import DragIndicator from "./DragIndicator/DragIndicator";
-import { SelectedPlaceType } from "./SelectedPlace/SelectedPlace";
 
-const SelectedPlaces = () => {
-  const [places, setPlaces] = useState(selectedPlaces);
-  const [ariaLabel, setAriaLabel] = useState(-1);
-  const [active, setActive] = useState(false);
-  const [firstPlace, setFirstPlace] = useState<SelectedPlaceType>(places[0]);
+type SetPlaceType = Dispatch<SetStateAction<SelectedPlaceType[]>>;
 
-  useEffect(() => {
-    setFirstPlace(places[0]);
-  }, [places]);
+interface SelectedPlacesType {
+  handleDragStart: React.DragEventHandler<HTMLLIElement>;
+  handleDragEnter: React.DragEventHandler<HTMLDivElement>;
+  handleDragLeave: React.DragEventHandler<HTMLDivElement>;
+  handleDragOver: React.DragEventHandler<HTMLDivElement>;
+  handleDrop: React.DragEventHandler<HTMLDivElement>;
+  places: SelectedPlaceType[];
+  ariaLabel: number;
+  active: boolean;
+  setPlaces: SetPlaceType;
+  column: number;
+}
 
-  const handleDragStart = (e: React.DragEvent<HTMLLIElement>) => {
-    console.log("id:", e.currentTarget.ariaLabel);
-    console.log(selectedPlaces[Number(e.currentTarget.ariaLabel) - 1]);
-
-    const id = e.currentTarget.ariaLabel;
-
-    const unselectedPlaces = places.filter((place) => place.id !== Number(id));
-
-    // console.log(unselectedPlaces);
-
-    e.dataTransfer?.setData("text/plain", id !== null ? id : "");
-  };
-
-  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log("enter");
-    const ariaLabel = Number(e.currentTarget?.ariaLabel);
-    // console.log(ariaLabel);
-
-    setAriaLabel(ariaLabel);
-    setActive(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log("leave");
-    setActive(false);
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-
-    setActive(true);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    console.log("drop");
-
-    console.log("firstPlace", firstPlace.id);
-
-    console.log(e.currentTarget.ariaLabel);
-    const dropzone = Number(e.currentTarget.ariaLabel);
-    const drop = Number(e.dataTransfer?.getData("text/plain"));
-
-    console.log("drop", drop);
-    console.log("dropzone", dropzone);
-
-    if (dropzone === -1 && drop !== firstPlace.id) {
-      const droppedPlace = places.find((place) => place.id === drop);
-      console.log(droppedPlace);
-      const filteredPlaces = places.filter((place) => place.id !== drop);
-      if (droppedPlace !== undefined)
-        setPlaces([droppedPlace, ...filteredPlaces]);
-    } else if (drop !== dropzone) {
-      const droppedPlace = places.find((place) => place.id === drop);
-
-      const newPlaces = places.filter((place) => place.id !== drop);
-      const index = newPlaces.findIndex((place) => place.id === dropzone);
-
-      const beforezone = newPlaces.slice(0, index + 1);
-      const afterzone = newPlaces.slice(index + 1);
-      const final = [...beforezone, droppedPlace, ...afterzone].filter(
-        Boolean
-      ) as SelectedPlaceType[];
-
-      if (final !== undefined) {
-        setPlaces(final);
-      }
-    }
-
-    setActive(false);
-  };
-
+const SelectedPlaces = ({
+  handleDragStart,
+  handleDragEnter,
+  handleDragLeave,
+  handleDragOver,
+  handleDrop,
+  places,
+  ariaLabel,
+  active,
+  setPlaces,
+  column,
+}: SelectedPlacesType) => {
   return (
     <div className="selectedPlaces">
       <ul>
@@ -98,6 +43,8 @@ const SelectedPlaces = () => {
           id={-1}
           ariaLabel={ariaLabel}
           active={active}
+          dataColumn={-1}
+          column={column}
         />
         {places.map((place, index) => (
           <>
@@ -118,6 +65,7 @@ const SelectedPlaces = () => {
               handleDrop={handleDrop}
               ariaLabel={ariaLabel}
               active={active}
+              column={column}
             />
           </>
         ))}

@@ -8,6 +8,18 @@ export type SelectedPlaceType = {
   createdAt: string;
 };
 
+export interface PlanType {
+  tourStart: string;
+  tourEnd: string;
+}
+
+export const plans: PlanType[] = [
+  {
+    tourStart: "Sun May 15 2024 00:00:00 GMT+0900 (한국 표준시)",
+    tourEnd: "Sun May 17 2024 00:00:00 GMT+0900 (한국 표준시)",
+  },
+];
+
 export const selectedPlaces: SelectedPlaceType[] = [
   {
     id: 1,

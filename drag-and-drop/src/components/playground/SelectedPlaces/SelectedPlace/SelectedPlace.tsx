@@ -12,7 +12,7 @@ export type SelectedPlaceType = {
   createdAt: string;
 };
 
-type SetPlaceType = Dispatch<SetStateAction<SelectedPlaceType[]>>;
+export type SetPlaceType = Dispatch<SetStateAction<SelectedPlaceType[]>>;
 
 interface SelectedPlacesType {
   id: number;
@@ -30,6 +30,7 @@ interface SelectedPlacesType {
   handleDrop: React.DragEventHandler<HTMLDivElement>;
   ariaLabel: number;
   active: boolean;
+  column: number;
 }
 
 enum ContentType {
@@ -55,6 +56,7 @@ const SelectedPlace: React.FC<SelectedPlacesType> = ({
   handleDrop,
   ariaLabel,
   active,
+  column,
 }) => {
   const handleDuplicate = () => {
     setPlaces((prev) => {
@@ -98,6 +100,8 @@ const SelectedPlace: React.FC<SelectedPlacesType> = ({
         id={id}
         ariaLabel={ariaLabel}
         active={active}
+        dataColumn={-1}
+        column={column}
       />
     </>
   );

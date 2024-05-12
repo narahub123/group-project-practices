@@ -9,6 +9,8 @@ interface Props {
   id: number;
   ariaLabel: number;
   active: boolean;
+  dataColumn: number;
+  column: number;
 }
 
 const DragIndicator = ({
@@ -19,6 +21,8 @@ const DragIndicator = ({
   id,
   ariaLabel,
   active,
+  dataColumn,
+  column,
 }: Props) => {
   // console.log(id);
   // console.log(ariaLabel);
@@ -26,13 +30,16 @@ const DragIndicator = ({
   return (
     <div
       className={
-        id === ariaLabel && active ? "dragIndicator active" : "dragIndicator"
+        dataColumn === column && id === ariaLabel && active
+          ? "dragIndicator active"
+          : "dragIndicator"
       }
       aria-label={id.toString()}
       onDragEnter={onDragEnter}
       onDragLeave={onDragLeave}
       onDragOver={onDragOver}
       onDrop={onDrop}
+      data-column={dataColumn}
     >
       <p></p>
     </div>
