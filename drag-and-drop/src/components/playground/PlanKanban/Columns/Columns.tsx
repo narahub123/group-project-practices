@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./columns.css";
 import Column from "./Column/Column";
 import { SelectedPlaceType } from "../../SelectedPlaces/SelectedPlace/SelectedPlace";
+import { ColumnPlaces } from "../../Playground";
 
 export type ColumnsType = {
   dates: Date[];
@@ -14,6 +15,7 @@ export type ColumnsType = {
   ariaLabel: number;
   active: boolean;
   column: number;
+  columnPlaces: ColumnPlaces;
 };
 
 const Columns = ({
@@ -27,7 +29,15 @@ const Columns = ({
   ariaLabel,
   active,
   column,
+  columnPlaces,
 }: ColumnsType) => {
+  const [selectedPlaces, setSelectedPlaces] = useState<SelectedPlaceType[]>([]);
+
+  const columnKeys = Object.keys(columnPlaces);
+  const keys = columnKeys.map((columnKey) =>
+    Number(columnKey.split("column")[1])
+  );
+
   return (
     <div className="columns">
       {dates.map((date, index) => (
@@ -42,7 +52,9 @@ const Columns = ({
           ariaLabel={ariaLabel}
           active={active}
           dataColumn={index}
-          column={column}
+          column={index}
+          setSelectedPlaces={setSelectedPlaces}
+          columnPlaces={columnPlaces[`column${index}`]}
         />
       ))}
     </div>

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import "./column.css";
 import { days } from "../../../../../data/days";
 import DragIndicator from "../../../SelectedPlaces/DragIndicator/DragIndicator";
-import { SelectedPlaceType } from "../../../SelectedPlaces/SelectedPlace/SelectedPlace";
+import SelectedPlace, {
+  SelectedPlaceType,
+  SetPlaceType,
+} from "../../../SelectedPlaces/SelectedPlace/SelectedPlace";
+import { ColumnPlaces } from "../../../Playground";
 
 type ColumnType = {
   date: Date;
@@ -16,6 +20,8 @@ type ColumnType = {
   active: boolean;
   dataColumn: number;
   column: number;
+  setSelectedPlaces: SetPlaceType;
+  columnPlaces: SelectedPlaceType[];
 };
 
 const Column = ({
@@ -30,7 +36,10 @@ const Column = ({
   active,
   dataColumn,
   column,
+  setSelectedPlaces,
+  columnPlaces,
 }: ColumnType) => {
+  // const [columnPlaces, setColumnPlaces] = useState([]);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const dateForm = date.getDate();
@@ -51,7 +60,29 @@ const Column = ({
           dataColumn={dataColumn}
           column={column}
         />
-        <div className="place">place</div>
+        <div className="place">
+          {columnPlaces?.map((columnPlace, index) => (
+            <SelectedPlace
+              key={index}
+              id={columnPlace.id}
+              name={columnPlace.name}
+              description={columnPlace.description}
+              addr={columnPlace.addr}
+              contentTypeId={columnPlace.contentTypeId}
+              img={columnPlace.img}
+              createdAt={columnPlace.createdAt}
+              setPlaces={setSelectedPlaces}
+              handleDragStart={handleDragStart}
+              handleDragEnter={handleDragEnter}
+              handleDragLeave={handleDragLeave}
+              handleDragOver={handleDragOver}
+              handleDrop={handleDrop}
+              ariaLabel={ariaLabel}
+              active={active}
+              column={column}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

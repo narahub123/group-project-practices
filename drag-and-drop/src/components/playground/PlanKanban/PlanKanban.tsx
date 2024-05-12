@@ -3,6 +3,7 @@ import "./planKanban.css";
 import Columns, { ColumnsType } from "./Columns/Columns";
 import { plans } from "../../../data/selectedPlaces";
 import { SelectedPlaceType } from "../SelectedPlaces/SelectedPlace/SelectedPlace";
+import { ColumnPlaces } from "../Playground";
 
 type KanbanType = {
   handleDragStart: React.DragEventHandler<HTMLLIElement>;
@@ -14,6 +15,7 @@ type KanbanType = {
   ariaLabel: number;
   active: boolean;
   column: number;
+  columnPlaces: ColumnPlaces;
 };
 
 const PlanKanban = ({
@@ -26,6 +28,7 @@ const PlanKanban = ({
   ariaLabel,
   active,
   column,
+  columnPlaces,
 }: KanbanType) => {
   const plan = plans[0];
 
@@ -33,9 +36,6 @@ const PlanKanban = ({
   const end = new Date(plan.tourEnd);
   let diff = Math.abs(end.getTime() - start.getTime());
   diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-  console.log(start);
-  console.log(end);
-  console.log(diff);
 
   const dates = [];
 
@@ -44,8 +44,6 @@ const PlanKanban = ({
     const newDate = new Date(startDay.setDate(startDay.getDate() + i));
     dates.push(newDate);
   }
-
-  console.log(dates);
 
   return (
     <div className="planKanban">
@@ -63,6 +61,7 @@ const PlanKanban = ({
             ariaLabel={ariaLabel}
             active={active}
             column={column}
+            columnPlaces={columnPlaces}
           />
         </div>
       </div>

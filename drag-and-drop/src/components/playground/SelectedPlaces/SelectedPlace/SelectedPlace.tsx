@@ -67,6 +67,8 @@ const SelectedPlace: React.FC<SelectedPlacesType> = ({
     });
   };
 
+  // console.log(column);
+
   return (
     <>
       <li
@@ -75,6 +77,7 @@ const SelectedPlace: React.FC<SelectedPlacesType> = ({
         onDragStart={handleDragStart}
         id={id.toString()}
         aria-label={id.toString()}
+        data-column={column}
       >
         <span className="image">
           <img src={img} alt="img" />
@@ -100,7 +103,7 @@ const SelectedPlace: React.FC<SelectedPlacesType> = ({
         id={id}
         ariaLabel={ariaLabel}
         active={active}
-        dataColumn={-1}
+        dataColumn={column}
         column={column}
       />
     </>
