@@ -9,7 +9,16 @@ export const isOwner = async (
   next: express.NextFunction
 ) => {
   try {
-    const { id } = req.params;
+    const sessionToken = req.cookies["ANTONIO-AUTH"];
+    if (!sessionToken) {
+      return res.sendStatus(403);
+    }
+
+    console.log(sessionToken);
+
+    const existingUser = await getUserBySessionToken(sessionToken);
+
+    const id = existingUser._id.toString();
     const currentUserId = get(req, "identity._id") as string;
 
     if (!currentUserId) {
