@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import { AreaCode, ContentTypeId } from "../data/areacode";
+import { AreaCode } from "../data/areacode";
 
 const apiKey = process.env.TOUR_API_KEY;
 
