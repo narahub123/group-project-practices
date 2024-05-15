@@ -1,6 +1,6 @@
 import express from "express";
 
-import { ScheduleModel as Schedule } from "../db/schedule";
+import { ScheduleModel as Schedule } from "../db/schedules";
 import users from "routers/users";
 import { getUserBySessionToken } from "../db/users";
 
@@ -19,7 +19,7 @@ export const getAllSchedulesById = async (
 
   const id = existingUser._id.toString();
 
-  const schedules = await Schedule.findById(id);
+  const schedules = await Schedule.find({ id });
 
   if (!schedules) {
     return res.sendStatus(404);

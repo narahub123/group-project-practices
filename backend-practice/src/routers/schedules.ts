@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAllSchedulesById } from "../controllers/schedule";
+import { getAllSchedulesById } from "../controllers/schedules";
 import { isAuthenticated, isOwner } from "../middlewares/index";
 
 export default (router: express.Router) => {

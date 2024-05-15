@@ -2,7 +2,7 @@ import express from "express";
 
 import authenticaction from "./authentication";
 import users from "./users";
-import schedule from "./schedule";
+import schedule from "./schedules";
 import places from "./places";
 
 const router = express.Router();
