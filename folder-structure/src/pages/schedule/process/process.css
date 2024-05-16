@@ -1,5 +1,19 @@
 .process {
-  .active {
-    color: aqua;
+  width: 75px;
+  padding: 10px;
+  .logo {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+  }
+  nav {
+    ul {
+      li {
+        padding-top: 50px;
+        .active {
+          color: aqua;
+        }
+      }
+    }
   }
 }

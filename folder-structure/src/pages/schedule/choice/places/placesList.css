@@ -1,0 +1,46 @@
+.placesList {
+  padding: 20px 10px;
+  min-width: 270px;
+  .info {
+    .name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .duration {
+      font-size: 14px;
+      color: gray;
+    }
+  }
+  .search {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+  .category {
+    padding: 10px;
+    ul {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+  .placeList {
+    ul {
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .plus {
+          text-align: center;
+          p {
+            padding: 10px 7px;
+            background-color: rgba(128, 128, 128, 0.241);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: gray;
+          }
+        }
+      }
+    }
+  }
+}

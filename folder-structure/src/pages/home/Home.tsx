@@ -3,6 +3,7 @@ import Search from "../../components/ui/Search";
 import MetroCard from "./MetroCard";
 import MetroModal from "./MetroModal";
 import { MetroType, metros } from "../../data/metro";
+import "./home.css";
 
 const Home = () => {
   const [active, setActive] = useState(false);
@@ -15,7 +16,9 @@ const Home = () => {
   return (
     <div className="home">
       {active && metro && <MetroModal metro={metro} setActive={setActive} />}
-      <Search />
+      <div className="search">
+        <Search />
+      </div>
       <div className="container">
         <ul>
           {metros.map((metro) => (

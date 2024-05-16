@@ -1,0 +1,40 @@
+.selectedPlacesList {
+  padding: 20px 10px;
+  min-width: 300px;
+  .info {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    .count {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .reset {
+      cursor: pointer;
+    }
+  }
+  .selectedList {
+    margin: 10px 0;
+    ul {
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .index {
+          p {
+            text-align: center;
+            border-radius: 50%;
+            background-color: green;
+            padding: 0 5px;
+            color: white;
+          }
+        }
+        .selectedPlaceInfo {
+        }
+        .trash {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

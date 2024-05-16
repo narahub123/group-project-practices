@@ -1,6 +1,7 @@
 import { MetroType } from "../../data/metro";
 import { Link } from "react-router-dom";
 import { metros } from "../../data/metro";
+import "./metroCard.css";
 
 interface MetroCardProps extends MetroType {
   setActive: (value: boolean) => void;
@@ -21,7 +22,7 @@ const MetroCard = ({
     metro && setMetro(metro);
   };
   return (
-    <Link to="" onClick={() => handleClick(areaCode)}>
+    <Link to="" onClick={() => handleClick(areaCode)} className="metroCard">
       <img src={imgUrl} alt={name} />
       <p>{name}</p>
     </Link>

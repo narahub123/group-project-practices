@@ -7,31 +7,45 @@ const Process = () => {
   const { hash } = location;
 
   return (
-    <>
-      <Link to="/">
-        <img src="" alt="로고" />
-      </Link>
-      <nav className="process">
-        <Link
-          to="#link1"
-          className={hash === "" || hash === "#link1" ? "link active" : "link"}
-        >
-          STEP1 날짜 정하기
+    <div className="process">
+      <div className="logo">
+        <Link to="/">
+          <img src="" alt="로고" />
         </Link>
-        <Link
-          to="#link2"
-          className={hash === "#link2" ? "link active" : "link"}
-        >
-          STEP2 장소 정하기
-        </Link>
-        <Link
-          to="#link3"
-          className={hash === "#link3" ? "link active" : "link"}
-        >
-          STEP3 숙소 정하기
-        </Link>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <Link
+              to="#link1"
+              className={
+                hash === "" || hash === "#link1" ? "link active" : "link"
+              }
+            >
+              STEP1 <br /> 날짜 선택
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="#link2"
+              className={hash === "#link2" ? "link active" : "link"}
+            >
+              STEP2 <br />
+              장소 선택
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="#link3"
+              className={hash === "#link3" ? "link active" : "link"}
+            >
+              STEP3 <br />
+              숙소 선택
+            </Link>
+          </li>
+        </ul>
       </nav>
-    </>
+    </div>
   );
 };
 

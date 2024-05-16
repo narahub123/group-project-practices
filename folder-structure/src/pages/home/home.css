@@ -1,0 +1,15 @@
+.home {
+  padding: 20px;
+  position: relative;
+  .search {
+    padding: 50px 0;
+    text-align: center;
+  }
+  .container {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}

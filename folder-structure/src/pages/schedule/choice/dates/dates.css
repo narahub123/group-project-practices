@@ -1,0 +1,35 @@
+.dates {
+  width: 50%;
+  min-width: 700px;
+  .explanation {
+    margin: 30px auto;
+    p {
+      text-align: center;
+    }
+  }
+  .container {
+    margin: 0 auto;
+    .months {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+      nav.before {
+        padding: 10px;
+      }
+      span.curMonth {
+        padding: 10px 40px;
+      }
+      span.nextMonth {
+        padding: 10px 40px;
+      }
+      nav.after {
+        padding: 10px;
+      }
+    }
+    .calendars {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+}

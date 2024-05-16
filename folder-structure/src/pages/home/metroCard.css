@@ -1,0 +1,14 @@
+a.metroCard {
+  /* border: 1px solid black; */
+  margin: 15px;
+  img {
+    width: 200px;
+    height: 200px;
+  }
+
+  p {
+    width: 200px;
+    padding-top: 10px;
+    text-align: center;
+  }
+}
