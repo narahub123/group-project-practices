@@ -5,12 +5,13 @@ export const getAllPlacesByKeywordNContentTypeId = async (
   req: express.Request,
   res: express.Response
 ) => {
-  let { keyword, contentTypeId } = req.body;
+  let { areaCode } = req.params;
 
-  keyword = "서울";
-  contentTypeId = "";
+  // console.log(areaCode);
 
-  const places = await getPlacesByKeyAndId(keyword, contentTypeId);
+  const contentTypeId = "";
+
+  const places = await getPlacesByKeyAndId(areaCode, contentTypeId);
 
   return res.status(200).json(places);
 };

@@ -4,10 +4,11 @@
   padding: 3px;
   span.photo {
     border: 1px solid black;
-    width: 40px;
-    height: 40px;
+
     margin: 5px;
     img {
+      width: 40px;
+      height: 40px;
     }
   }
   span.info {

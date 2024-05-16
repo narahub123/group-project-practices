@@ -12,39 +12,17 @@ const SelectedPlacesList = () => {
       </div>
       <div className="selectedList">
         <ul>
-          <li>
-            <span className="index">
-              <p>1</p>
-            </span>
-            <span className="selectedPlaceInfo">
-              <PlaceCard />
-            </span>
-            <span className="trash">
-              <LuTrash2 />
-            </span>
-          </li>
-          <li>
-            <span className="index">
-              <p>2</p>
-            </span>
-            <span className="selectedPlaceInfo">
-              <PlaceCard />
-            </span>
-            <span className="trash">
-              <LuTrash2 />
-            </span>
-          </li>
-          <li>
-            <span className="index">
-              <p>3</p>
-            </span>
-            <span className="selectedPlaceInfo">
-              <PlaceCard />
-            </span>
-            <span className="trash">
-              <LuTrash2 />
-            </span>
-          </li>
+          {
+            <li>
+              <span className="index">
+                <p>1</p>
+              </span>
+              <span className="selectedPlaceInfo">{/* <PlaceCard /> */}</span>
+              <span className="trash">
+                <LuTrash2 />
+              </span>
+            </li>
+          }
         </ul>
       </div>
     </div>
