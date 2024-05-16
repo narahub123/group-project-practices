@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const ScheduleSchema = new mongoose.Schema({
+export const ScheduleSchema = new mongoose.Schema({
+  schedule_id: { type: String, required: true },
   metro_id: { type: Number, required: true },
   user_id: { type: String, required: true },
   start_date: { type: Date, required: true },

@@ -1,10 +1,15 @@
 import express from "express";
 
-import { ScheduleModel as Schedule } from "../db/schedules";
-import users from "routers/users";
 import { getUserBySessionToken } from "../db/users";
+import {
+  getScheduleById,
+  getSchedulesById,
+  createScheduleByValue,
+  deleteScheduleById,
+  updateScheduleById,
+} from "../apis/schedules";
 
-export const getAllSchedulesById = async (
+export const getAllSchedules = async (
   req: express.Request,
   res: express.Response
 ) => {
@@ -13,13 +18,14 @@ export const getAllSchedulesById = async (
     return res.sendStatus(403);
   }
 
-  console.log(sessionToken);
-
   const existingUser = await getUserBySessionToken(sessionToken);
 
-  const id = existingUser._id.toString();
+  const id =
+    existingUser._id.toString() === "관리자"
+      ? null
+      : existingUser._id.toString();
 
-  const schedules = await Schedule.find({ id });
+  const schedules = await getSchedulesById(id);
 
   if (!schedules) {
     return res.sendStatus(404);
@@ -28,22 +34,58 @@ export const getAllSchedulesById = async (
   return res.status(200).json(schedules);
 };
 
-export const getSchedules = async (
+export const getSchedule = async (
   req: express.Request,
   res: express.Response
-) => {};
+) => {
+  const { id } = req.params;
 
-export const createSchedules = async (
-  req: express.Request,
-  res: express.Response
-) => {};
+  const schedule = await getScheduleById(id);
 
-export const deleteSchedules = async (
-  req: express.Request,
-  res: express.Response
-) => {};
+  if (!schedule) {
+    return res.sendStatus(403);
+  }
 
-export const updateSchedules = async (
+  return res.status(200).json(schedule);
+};
+
+export const createSchedule = async (
   req: express.Request,
   res: express.Response
-) => {};
+) => {
+  try {
+    const { values } = req.body;
+
+    if (!values) {
+      return res.sendStatus(403);
+    }
+
+    const schedule = createScheduleByValue(values);
+
+    return res.sendStatus(201).json(schedule);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+
+export const deleteSchedule = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const { id } = req.params;
+  const deletedSchedule = await deleteScheduleById(id);
+
+  return res.json(deletedSchedule);
+};
+
+export const updateSchedule = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const { id, values } = req.body;
+
+  const schedule = await updateScheduleById(id, values);
+
+  return res.sendStatus(200).json(schedule);
+};
