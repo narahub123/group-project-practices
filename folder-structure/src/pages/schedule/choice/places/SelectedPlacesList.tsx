@@ -56,8 +56,8 @@ const SelectedPlacesList = ({
     setPlaces(filteredPlaces);
   };
 
-  console.log(selectedPlaces);
-  console.log(places);
+  // console.log(selectedPlaces);
+  // console.log(places);
 
   return (
     <div className="selectedPlacesList">

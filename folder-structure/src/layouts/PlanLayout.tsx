@@ -1,9 +1,10 @@
 import Process from "../pages/schedule/process/Process";
 import Choice from "../pages/schedule/choice/Choice";
-import Map from "../pages/schedule/map/Map";
+
 import "./planLayout.css";
 import PlaceModal from "../pages/schedule/choice/places/PlaceModal";
 import { useState } from "react";
+import KakaoMap from "../pages/schedule/map/Map";
 
 const PlanLayout = () => {
   const [active, setActive] = useState(false);
@@ -31,7 +32,7 @@ const PlanLayout = () => {
         selectedPlaces={selectedPlaces}
         setSelectedPlaces={setSelectedPlaces}
       />
-      <Map />
+      <KakaoMap selectedPlaces={selectedPlaces} />
     </div>
   );
 };
