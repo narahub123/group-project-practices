@@ -95,7 +95,6 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
         const lat: number = Number(result[0].y);
         const lng: number = Number(result[0].x);
         const coo: CoordsType = { title, latlng: { lat, lng } };
-        console.log(coo);
 
         setCoords((prevCoord) => [...prevCoord, coo]);
       } else {
@@ -105,11 +104,11 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
 
     if (selectedTitles.length > 0) {
       selectedTitles.forEach((place) => {
-        console.log(place.addr);
-
         setCoords([]);
         geocoder.addressSearch(place.addr, callback);
       });
+    } else {
+      setCoords([]);
     }
   }, [selectedTitles]);
 
@@ -120,6 +119,8 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
       title: selectedTitles[index]?.title || place.title,
     };
   });
+
+  console.log(coords);
 
   console.log(filteredCoords);
   console.log(selectedTitles);
