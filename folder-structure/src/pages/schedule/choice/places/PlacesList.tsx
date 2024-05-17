@@ -8,7 +8,19 @@ import { AreaCode } from "../../../../data/areacode";
 import { ScheduleProps } from "../Choice";
 import { metros } from "../../../../data/metro";
 
-const PlacesList = ({ schedule, setSchedule }: ScheduleProps) => {
+export interface SchedulePlus extends ScheduleProps {
+  setContentId: (value: string) => void;
+  setContentTypeId: (value: string) => void;
+  setActive: (value: boolean) => void;
+}
+
+const PlacesList = ({
+  schedule,
+  setSchedule,
+  setContentId,
+  setContentTypeId,
+  setActive,
+}: SchedulePlus) => {
   const [places, setPlaces] = useState<PlaceCardProps[]>([]);
 
   const parmas = useParams();
@@ -92,6 +104,9 @@ const PlacesList = ({ schedule, setSchedule }: ScheduleProps) => {
                   contenttypeid={place.contenttypeid}
                   title={place.title}
                   firstimage={place.firstimage}
+                  setContentId={setContentId}
+                  setContentTypeId={setContentTypeId}
+                  setActive={setActive}
                 />
               </span>
               <span className="plus">

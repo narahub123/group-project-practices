@@ -3,8 +3,13 @@ import "./selectedPlacesList.css";
 import PlaceCard from "./PlaceCard";
 import { LuTrash2 } from "react-icons/lu";
 import { ScheduleProps } from "../Choice";
+import { SchedulePlus } from "./PlacesList";
 
-const SelectedPlacesList = ({ setSchedule }: ScheduleProps) => {
+const SelectedPlacesList = ({
+  setSchedule,
+  setContentId,
+  setContentTypeId,
+}: SchedulePlus) => {
   return (
     <div className="selectedPlacesList">
       <div className="info">

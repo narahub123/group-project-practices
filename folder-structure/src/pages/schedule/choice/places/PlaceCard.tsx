@@ -13,6 +13,12 @@ export interface PlaceCardProps {
   firstimage: string;
 }
 
+interface PlaceCardPlus extends PlaceCardProps {
+  setContentId: (value: string) => void;
+  setContentTypeId: (value: string) => void;
+  setActive: (value: boolean) => void;
+}
+
 const PlaceCard = ({
   addr1,
   addr2,
@@ -21,11 +27,20 @@ const PlaceCard = ({
   contenttypeid,
   title,
   firstimage,
-}: PlaceCardProps) => {
+  setContentId,
+  setContentTypeId,
+  setActive,
+}: PlaceCardPlus) => {
   const addr = addr1 + addr2;
 
+  const handleClick = () => {
+    setActive(true);
+    setContentId(contentid);
+    setContentTypeId(contenttypeid);
+  };
+
   return (
-    <div className="placeCard">
+    <div className="placeCard" onClick={handleClick}>
       <span className="photo">
         <img
           src={
