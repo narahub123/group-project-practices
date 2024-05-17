@@ -8,7 +8,10 @@ import { useState } from "react";
 const PlanLayout = () => {
   const [active, setActive] = useState(false);
   const [contentId, setContentId] = useState("");
-  const [contentTypeId, setContentTypeId] = useState("");
+  const [contentTypeId, setContentTypeId] = useState("1");
+
+  const [selectedPlaces, setSelectedPlaces] = useState<string[]>([]);
+
   return (
     <div className="plan">
       {active && (
@@ -19,11 +22,14 @@ const PlanLayout = () => {
           active={active}
         />
       )}
-      <Process />
+      <Process setContentTypeId={setContentTypeId} />
       <Choice
+        contentTypeId={contentTypeId}
         setActive={setActive}
         setContentId={setContentId}
         setContentTypeId={setContentTypeId}
+        selectedPlaces={selectedPlaces}
+        setSelectedPlaces={setSelectedPlaces}
       />
       <Map />
     </div>

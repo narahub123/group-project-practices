@@ -21,6 +21,13 @@
     ul {
       display: flex;
       justify-content: space-evenly;
+      li {
+        cursor: pointer;
+      }
+
+      li.active {
+        color: red;
+      }
     }
   }
   .placeList {
@@ -29,6 +36,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        cursor: pointer;
         .plus {
           text-align: center;
           p {
@@ -38,6 +46,16 @@
             cursor: pointer;
             font-weight: bold;
             color: gray;
+          }
+
+          p:hover {
+            background-color: blue;
+            color: white;
+          }
+
+          p:active {
+            background-color: red;
+            color: white;
           }
         }
       }

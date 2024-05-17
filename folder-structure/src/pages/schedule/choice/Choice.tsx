@@ -26,12 +26,22 @@ export interface ScheduleProps extends ScheduleType {
 }
 
 export interface ChoiceProps {
+  contentTypeId: string;
   setActive: (value: boolean) => void;
   setContentId: (value: string) => void;
   setContentTypeId: (value: string) => void;
+  selectedPlaces: string[];
+  setSelectedPlaces: (value: string[]) => void;
 }
 
-const Choice = ({ setActive, setContentId, setContentTypeId }: ChoiceProps) => {
+const Choice = ({
+  contentTypeId,
+  setActive,
+  setContentId,
+  setContentTypeId,
+  selectedPlaces,
+  setSelectedPlaces,
+}: ChoiceProps) => {
   const [schedule, setSchedule] = useState<ScheduleType>({});
   const location = useLocation();
   const { hash } = location;
@@ -53,11 +63,14 @@ const Choice = ({ setActive, setContentId, setContentTypeId }: ChoiceProps) => {
       )}
       {(hash === "#link2" || hash === "#link3") && (
         <Places
+          contentTypeId={contentTypeId}
           setSchedule={setSchedule}
           schedule={schedule}
           setActive={setActive}
           setContentId={setContentId}
           setContentTypeId={setContentTypeId}
+          selectedPlaces={selectedPlaces}
+          setSelectedPlaces={setSelectedPlaces}
         />
       )}
     </div>

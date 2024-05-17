@@ -9,19 +9,27 @@ import { ScheduleProps } from "../Choice";
 import { metros } from "../../../../data/metro";
 
 export interface SchedulePlus extends ScheduleProps {
+  contentTypeId: string;
   setContentId: (value: string) => void;
   setContentTypeId: (value: string) => void;
   setActive: (value: boolean) => void;
+  selectedPlaces: string[];
+  setSelectedPlaces: (value: string[]) => void;
 }
 
 const PlacesList = ({
   schedule,
   setSchedule,
+  contentTypeId,
   setContentId,
   setContentTypeId,
   setActive,
+  selectedPlaces,
+  setSelectedPlaces,
 }: SchedulePlus) => {
   const [places, setPlaces] = useState<PlaceCardProps[]>([]);
+
+  const [isON, setIsOn] = useState(false);
 
   const parmas = useParams();
 
@@ -29,7 +37,6 @@ const PlacesList = ({
 
   const { hash } = location;
 
-  const contentTypeId = hash === "#link2" ? "1" : "32";
   const areacode = Object.entries(AreaCode).find((area) =>
     area[0].includes(parmas.metro ?? "")
   );
@@ -48,6 +55,8 @@ const PlacesList = ({
           return;
         }
 
+        console.log(contentTypeId);
+
         const response = await fetch(
           `http://localhost:8080/places/${areacode[1]}/${contentTypeId}`
         );
@@ -63,7 +72,6 @@ const PlacesList = ({
           title: data.title,
           firstimage: data.firstimage,
         }));
-        console.log(filteredPlaces);
 
         setPlaces(filteredPlaces);
       } catch (error) {
@@ -72,7 +80,18 @@ const PlacesList = ({
     };
 
     fetchData();
-  }, [hash]);
+  }, [hash, contentTypeId]);
+
+  const handleFliter = (contentTypeId: string) => {
+    setContentTypeId(contentTypeId);
+    setIsOn(true);
+  };
+
+  const handleAdd = (contentId: string) => {
+    const prevPlaces = selectedPlaces;
+
+    setSelectedPlaces([...prevPlaces, contentId]);
+  };
 
   return (
     <div className="placesList">
@@ -85,10 +104,34 @@ const PlacesList = ({
       </div>
       <div className="category">
         <ul>
-          <li>전체</li>
-          <li>관광</li>
-          <li>문화</li>
-          <li>식당</li>
+          <li
+            className={
+              contentTypeId === "1" || (contentTypeId === "1" && isON)
+                ? "link active"
+                : "link"
+            }
+            onClick={() => handleFliter("1")}
+          >
+            전체
+          </li>
+          <li
+            className={contentTypeId === "12" && isON ? "link active" : "link"}
+            onClick={() => handleFliter("12")}
+          >
+            관광
+          </li>
+          <li
+            className={contentTypeId === "14" && isON ? "link active" : "link"}
+            onClick={() => handleFliter("14")}
+          >
+            문화
+          </li>
+          <li
+            className={contentTypeId === "39" && isON ? "link active" : "link"}
+            onClick={() => handleFliter("39")}
+          >
+            식당
+          </li>
         </ul>
       </div>
       <div className="placeList">
@@ -110,7 +153,7 @@ const PlacesList = ({
                 />
               </span>
               <span className="plus">
-                <p>+</p>
+                <p onClick={() => handleAdd(place.contentid)}>+</p>
               </span>
             </li>
           ))}

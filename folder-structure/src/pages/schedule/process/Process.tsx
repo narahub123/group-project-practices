@@ -2,7 +2,10 @@ import React from "react";
 import "./process.css";
 import { Link, useLocation } from "react-router-dom";
 
-const Process = () => {
+interface ProcessType {
+  setContentTypeId: (value: string) => void;
+}
+const Process = ({ setContentTypeId }: ProcessType) => {
   const location = useLocation();
   const { hash } = location;
 
@@ -29,6 +32,7 @@ const Process = () => {
             <Link
               to="#link2"
               className={hash === "#link2" ? "link active" : "link"}
+              onClick={() => setContentTypeId("1")}
             >
               STEP2 <br />
               장소 선택
@@ -38,6 +42,7 @@ const Process = () => {
             <Link
               to="#link3"
               className={hash === "#link3" ? "link active" : "link"}
+              onClick={() => setContentTypeId("32")}
             >
               STEP3 <br />
               숙소 선택
