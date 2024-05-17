@@ -15,7 +15,7 @@ interface PlaceModalProps {
   active: boolean;
 }
 
-interface PlaceApiDetailType extends PlaceApiType {
+export interface PlaceApiDetailType extends PlaceApiType {
   overview: string;
 }
 

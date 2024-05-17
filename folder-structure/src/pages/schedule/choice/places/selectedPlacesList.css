@@ -20,7 +20,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .index {
+        span.index {
           p {
             text-align: center;
             border-radius: 50%;
@@ -29,10 +29,14 @@
             color: white;
           }
         }
-        .selectedPlaceInfo {
-        }
-        .trash {
+        span.trash {
           padding: 10px;
+          cursor: pointer;
+          color: gray;
+        }
+
+        span.trash:hover {
+          color: black;
         }
       }
     }
