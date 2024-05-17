@@ -44,7 +44,10 @@ const PlaceCard = ({
       <span className="photo">
         <img
           src={
-            firstimage === "" ? metros[Number(areacode)]?.imgUrl : firstimage
+            firstimage === ""
+              ? metros.find((metro) => metro.areaCode.toString() === areacode)
+                  ?.imgUrl
+              : firstimage
           }
           alt="사진"
         />
