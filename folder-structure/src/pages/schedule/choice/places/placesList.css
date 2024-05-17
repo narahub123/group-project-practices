@@ -58,6 +58,27 @@
             color: white;
           }
         }
+        .minus {
+          text-align: center;
+          p {
+            padding: 10px 10px;
+            background-color: rgba(128, 128, 128, 0.241);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: gray;
+          }
+
+          p:hover {
+            background-color: blue;
+            color: white;
+          }
+
+          p:active {
+            background-color: red;
+            color: white;
+          }
+        }
       }
     }
   }

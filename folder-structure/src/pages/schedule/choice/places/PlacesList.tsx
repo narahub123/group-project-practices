@@ -28,7 +28,6 @@ const PlacesList = ({
   setSelectedPlaces,
 }: SchedulePlus) => {
   const [places, setPlaces] = useState<PlaceCardProps[]>([]);
-
   const [isON, setIsOn] = useState(false);
 
   const parmas = useParams();
@@ -54,8 +53,6 @@ const PlacesList = ({
         if (!areacode) {
           return;
         }
-
-        console.log(contentTypeId);
 
         const response = await fetch(
           `http://localhost:8080/places/${areacode[1]}/${contentTypeId}`
@@ -87,11 +84,20 @@ const PlacesList = ({
     setIsOn(true);
   };
 
-  const handleAdd = (contentId: string) => {
+  const handlePlus = (contentId: string) => {
     const prevPlaces = selectedPlaces;
 
     setSelectedPlaces([...prevPlaces, contentId]);
   };
+
+  const handleMinus = (contentId: string) => {
+    const newPlaces = selectedPlaces.filter((place) => place !== contentId);
+
+    setSelectedPlaces([...newPlaces]);
+  };
+
+  console.log(places);
+  console.log(selectedPlaces);
 
   return (
     <div className="placesList">
@@ -152,9 +158,16 @@ const PlacesList = ({
                   setActive={setActive}
                 />
               </span>
-              <span className="plus">
-                <p onClick={() => handleAdd(place.contentid)}>+</p>
-              </span>
+
+              {selectedPlaces.includes(place.contentid) ? (
+                <span className="minus">
+                  <p onClick={() => handleMinus(place.contentid)}>-</p>
+                </span>
+              ) : (
+                <span className="plus">
+                  <p onClick={() => handlePlus(place.contentid)}>+</p>
+                </span>
+              )}
             </li>
           ))}
         </ul>
