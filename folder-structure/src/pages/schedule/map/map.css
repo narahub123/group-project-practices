@@ -1,5 +1,5 @@
 .map {
   width: 100%;
   min-width: 400px;
-  height: 100vh;
+  height: calc(100vh - 18px);
 }

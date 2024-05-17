@@ -53,7 +53,7 @@ const PlaceCard = ({
         />
       </span>
       <span className="info">
-        <p className="name">{title}</p>
+        <p className="name">{`${title.substring(0, 15)}`}</p>
         <p>
           <span className="cate">{contentTypeIds[Number(contenttypeid)]}</span>
           <span className="addr">{`${addr.substring(0, 12)}...`}</span>

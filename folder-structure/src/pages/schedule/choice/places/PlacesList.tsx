@@ -54,6 +54,17 @@ const PlacesList = ({
           return;
         }
 
+        if (hash === "#link3") {
+          contentTypeId = "32";
+        } else if (
+          hash === "#link2" &&
+          contentTypeId !== "12" &&
+          contentTypeId !== "14" &&
+          contentTypeId !== "39"
+        ) {
+          contentTypeId = "1";
+        }
+
         const response = await fetch(
           `http://localhost:8080/places/${areacode[1]}/${contentTypeId}`
         );
@@ -96,9 +107,6 @@ const PlacesList = ({
     setSelectedPlaces([...newPlaces]);
   };
 
-  console.log(places);
-  console.log(selectedPlaces);
-
   return (
     <div className="placesList">
       <div className="info">
@@ -108,38 +116,52 @@ const PlacesList = ({
       <div className="search">
         <Search />
       </div>
+
       <div className="category">
         <ul>
-          <li
-            className={
-              contentTypeId === "1" || (contentTypeId === "1" && isON)
-                ? "link active"
-                : "link"
-            }
-            onClick={() => handleFliter("1")}
-          >
-            전체
-          </li>
-          <li
-            className={contentTypeId === "12" && isON ? "link active" : "link"}
-            onClick={() => handleFliter("12")}
-          >
-            관광
-          </li>
-          <li
-            className={contentTypeId === "14" && isON ? "link active" : "link"}
-            onClick={() => handleFliter("14")}
-          >
-            문화
-          </li>
-          <li
-            className={contentTypeId === "39" && isON ? "link active" : "link"}
-            onClick={() => handleFliter("39")}
-          >
-            식당
-          </li>
+          {hash !== "#link3" ? (
+            <>
+              <li
+                className={
+                  contentTypeId === "1" || (contentTypeId === "1" && isON)
+                    ? "link active"
+                    : "link"
+                }
+                onClick={() => handleFliter("1")}
+              >
+                전체
+              </li>
+              <li
+                className={
+                  contentTypeId === "12" && isON ? "link active" : "link"
+                }
+                onClick={() => handleFliter("12")}
+              >
+                관광
+              </li>
+              <li
+                className={
+                  contentTypeId === "14" && isON ? "link active" : "link"
+                }
+                onClick={() => handleFliter("14")}
+              >
+                문화
+              </li>
+              <li
+                className={
+                  contentTypeId === "39" && isON ? "link active" : "link"
+                }
+                onClick={() => handleFliter("39")}
+              >
+                식당
+              </li>
+            </>
+          ) : (
+            <li>숙소</li>
+          )}
         </ul>
       </div>
+
       <div className="placeList">
         <ul>
           {places.map((place) => (

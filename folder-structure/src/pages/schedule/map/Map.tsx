@@ -125,7 +125,7 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
           lat: Number(coord[0]?.lat) || 33.5563,
           lng: Number(coord[0]?.lng) || 126.79581,
         }}
-        style={{ minWidth: "400px", height: "100vh" }}
+        style={{ minWidth: "400px", height: "100%" }}
         level={9}
       >
         {filteredCoords.map((coord, index) => (
