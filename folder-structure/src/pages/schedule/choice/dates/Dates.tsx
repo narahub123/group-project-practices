@@ -2,8 +2,9 @@ import React from "react";
 import Calendar from "./Calendar";
 import "./dates.css";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import { ScheduleProps } from "../Choice";
 
-const Dates = () => {
+const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
   return (
     <div className="dates">
       <div className="explanation">

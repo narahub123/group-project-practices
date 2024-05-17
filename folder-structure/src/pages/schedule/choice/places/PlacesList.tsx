@@ -3,17 +3,31 @@ import "./placesList.css";
 import Search from "../../../../components/ui/Search";
 import PlaceCard, { PlaceCardProps } from "./PlaceCard";
 import { PlaceApiType } from "../../../../types/placeTypes";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { AreaCode } from "../../../../data/areacode";
+import { ScheduleProps } from "../Choice";
+import { metros } from "../../../../data/metro";
 
-const PlacesList = () => {
+const PlacesList = ({ schedule, setSchedule }: ScheduleProps) => {
   const [places, setPlaces] = useState<PlaceCardProps[]>([]);
 
   const parmas = useParams();
 
+  const location = useLocation();
+
+  const { hash } = location;
+
+  const contentTypeId = hash === "#link2" ? "1" : "32";
   const areacode = Object.entries(AreaCode).find((area) =>
     area[0].includes(parmas.metro ?? "")
   );
+
+  let areaName;
+  if (areacode) {
+    areaName = metros.find((metro) => metro.areaCode === Number(areacode[1]));
+  } else {
+    console.log("Areacode is not found");
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,12 +35,12 @@ const PlacesList = () => {
         if (!areacode) {
           return;
         }
+
         const response = await fetch(
-          `http://localhost:8080/places/${areacode[1]}`
+          `http://localhost:8080/places/${areacode[1]}/${contentTypeId}`
         );
 
         const jsonData = await response.json();
-        console.log(jsonData);
 
         const filteredPlaces = jsonData.map((data: PlaceApiType) => ({
           addr1: data.addr1,
@@ -37,6 +51,7 @@ const PlacesList = () => {
           title: data.title,
           firstimage: data.firstimage,
         }));
+        console.log(filteredPlaces);
 
         setPlaces(filteredPlaces);
       } catch (error) {
@@ -45,12 +60,12 @@ const PlacesList = () => {
     };
 
     fetchData();
-  }, []);
+  }, [hash]);
 
   return (
     <div className="placesList">
       <div className="info">
-        <p className="name">제주</p>
+        {areaName && <p className="name">{areaName?.name}</p>}
         <p className="duration">2024.05.17(금)~2024.05.18(토)</p>
       </div>
       <div className="search">

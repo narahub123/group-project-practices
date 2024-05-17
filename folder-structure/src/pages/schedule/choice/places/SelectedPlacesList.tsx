@@ -2,8 +2,9 @@ import React from "react";
 import "./selectedPlacesList.css";
 import PlaceCard from "./PlaceCard";
 import { LuTrash2 } from "react-icons/lu";
+import { ScheduleProps } from "../Choice";
 
-const SelectedPlacesList = () => {
+const SelectedPlacesList = ({ setSchedule }: ScheduleProps) => {
   return (
     <div className="selectedPlacesList">
       <div className="info">

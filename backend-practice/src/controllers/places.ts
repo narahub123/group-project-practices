@@ -5,11 +5,9 @@ export const getAllPlacesByKeywordNContentTypeId = async (
   req: express.Request,
   res: express.Response
 ) => {
-  let { areaCode } = req.params;
+  let { areaCode, contentTypeId } = req.params;
 
-  // console.log(areaCode);
-
-  const contentTypeId = "";
+  contentTypeId === "1" ? (contentTypeId = "") : contentTypeId;
 
   const places = await getPlacesByKeyAndId(areaCode, contentTypeId);
 

@@ -3,22 +3,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-import { AreaCode } from "../data/areacode";
-
 const apiKey = process.env.TOUR_API_KEY;
 
 export const getPlacesByKeyAndId = async (
   areaCode: string,
   contentTypeId: string
 ) => {
-  // 키워드로 areaCode 알아내기
-  // const areaCode = Object.entries(AreaCode).find((area) =>
-  //   area[0].includes(keyword)
-  // );
-
   // 변경 가능한 파라미터들
   const pageNo = 1;
-  const numOfRows = 10;
+  const numOfRows = 8;
 
   const apiUrl = `http://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=${apiKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&MobileApp=AppTest&MobileOS=ETC&arrange=A&areaCode=${areaCode}&contentTypeId=${contentTypeId}&_type=JSON`;
 
