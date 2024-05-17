@@ -14,7 +14,7 @@ const PlanLayout = () => {
   const [selectedPlaces, setSelectedPlaces] = useState<string[]>([]);
 
   return (
-    <div className="plan">
+    <div className="plan" style={active ? { overflow: "hidden" } : undefined}>
       {active && (
         <PlaceModal
           setActive={setActive}
