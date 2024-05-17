@@ -89,8 +89,6 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
       status: kakao.maps.services.Status
     ): void {
       if (status === kakao.maps.services.Status.OK) {
-        console.log(result);
-
         const title: string = result[0].address_name;
         const lat: number = Number(result[0].y);
         const lng: number = Number(result[0].x);
@@ -119,11 +117,6 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
       title: selectedTitles[index]?.title || place.title,
     };
   });
-
-  console.log(coords);
-
-  console.log(filteredCoords);
-  console.log(selectedTitles);
 
   return (
     <div className="map">

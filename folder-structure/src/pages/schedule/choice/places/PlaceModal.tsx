@@ -76,7 +76,10 @@ const PlaceModal = ({
                 <img
                   src={
                     place.firstimage === ""
-                      ? metros[Number(place.areacode)]?.imgUrl
+                      ? metros.find(
+                          (metro) =>
+                            metro.areaCode.toString() === place.areacode
+                        )?.imgUrl
                       : place.firstimage
                   }
                   alt={place.title}
