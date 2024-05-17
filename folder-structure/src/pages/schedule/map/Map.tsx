@@ -114,11 +114,11 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
   }, [selectedTitles]);
 
   const filteredCoords = coords.map((place, index) => {
-    return place;
-    // return {
-    //   ...place,
-    //   title: selectedTitles[index].title || place.title,
-    // };
+    // return place;
+    return {
+      ...place,
+      title: selectedTitles[index]?.title || place.title,
+    };
   });
 
   console.log(filteredCoords);
@@ -131,7 +131,7 @@ const KakaoMap = ({ selectedPlaces }: MapProps) => {
           lat: Number(coord[0]?.lat) || 33.5563,
           lng: Number(coord[0]?.lng) || 126.79581,
         }}
-        style={{ width: "400px", height: "100vh" }}
+        style={{ minWidth: "400px", height: "100vh" }}
         level={9}
       >
         {filteredCoords.map((coord, index) => (
