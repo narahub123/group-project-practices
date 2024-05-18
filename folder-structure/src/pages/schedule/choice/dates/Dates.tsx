@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Calendar from "./Calendar";
 import "./dates.css";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { ScheduleProps } from "../Choice";
 import {
   DestrucDate,
+  MonthBefore,
   MonthCurrent,
   MonthLater,
   dateMidFormatter,
 } from "../../../../utils/kakaoMap/time";
 
 const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
-  const today = dateMidFormatter(new Date());
+  const [today, setToday] = useState<Date>(dateMidFormatter(new Date()));
 
-  const curMonth = MonthCurrent(today);
-  const nextMonth = MonthLater(today);
+  const startDay = new Date(today);
+
+  const curMonth = MonthCurrent(startDay);
+  const nextMonth = MonthLater(startDay);
+
+  const handleMonthBefore = () => {
+    setToday(MonthBefore(today));
+  };
+  const handleMonthAfter = () => {
+    setToday(MonthLater(today));
+  };
 
   return (
     <div className="dates">
@@ -39,7 +49,7 @@ const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
       <div className="container">
         <div className="months">
           <span className="curMonth">
-            <nav className="before">
+            <nav className="before" onClick={handleMonthBefore}>
               <LuChevronLeft />
             </nav>
             <p>
@@ -54,7 +64,7 @@ const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
                 DestrucDate(nextMonth).month + 1
               }월`}
             </p>
-            <nav className="after">
+            <nav className="after" onClick={handleMonthAfter}>
               <LuChevronRight />
             </nav>
           </span>
