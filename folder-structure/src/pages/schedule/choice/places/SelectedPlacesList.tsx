@@ -62,7 +62,7 @@ const SelectedPlacesList = ({
   return (
     <div className="selectedPlacesList">
       <div className="info">
-        <span className="count">{selectedPlaces.length}</span>
+        <span className="count">{places.length}</span>
         <span className="reset" onClick={() => setSelectedPlaces([])}>
           장소 설정 초기화
         </span>
