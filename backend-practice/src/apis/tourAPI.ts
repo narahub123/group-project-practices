@@ -17,6 +17,8 @@ export const getPlacesByKeyAndId = async (
 
   const apiUrl = `http://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=${apiKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&MobileApp=AppTest&MobileOS=ETC&arrange=A&areaCode=${areaCode}&contentTypeId=${contentTypeId}&_type=JSON`;
 
+  console.log(apiUrl);
+
   try {
     const res = await axios.get(apiUrl);
     return res.data.response.body.items.item;
@@ -34,8 +36,6 @@ export const getPlaceById = async (contentId: string) => {
   const apiUrl = `http://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=${apiKey}&MobileApp=AppTest&MobileOS=ETC&contentId=${contentId}&_type=json&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&pageNo=${pageNo}&numOfRows=${numOfRows}`;
   try {
     const res = await axios.get(apiUrl);
-
-    console.log(res.data.response.body.items.item);
 
     return res.data.response.body.items.item;
   } catch (error) {
