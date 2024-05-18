@@ -18,9 +18,12 @@ export const getPlaceByContentId = async (
   req: express.Request,
   res: express.Response
 ) => {
-  let { contentId } = req.params;
+  try {
+    let { contentId } = req.params;
+    const place = await getPlaceById(contentId.toString());
 
-  const place = await getPlaceById(contentId.toString());
-
-  return res.status(200).json(place);
+    return res.status(200).json(place);
+  } catch (error) {
+    console.log(error);
+  }
 };

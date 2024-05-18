@@ -17,8 +17,6 @@ export const getPlacesByKeyAndId = async (
 
   const apiUrl = `http://apis.data.go.kr/B551011/KorService1/areaBasedList1?serviceKey=${apiKey}&pageNo=${pageNo}&numOfRows=${numOfRows}&MobileApp=AppTest&MobileOS=ETC&arrange=A&areaCode=${areaCode}&contentTypeId=${contentTypeId}&_type=JSON`;
 
-  console.log(apiUrl);
-
   try {
     const res = await axios.get(apiUrl);
     return res.data.response.body.items.item;
