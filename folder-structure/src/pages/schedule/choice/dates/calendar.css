@@ -1,4 +1,37 @@
 .calendar {
-  width: 100px;
-  margin: 0 auto;
+  .calendarTB {
+    thead {
+      tr {
+        th {
+          padding: 10px;
+        }
+        th.sun {
+          color: red;
+        }
+        th.sat {
+          color: blue;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td.date {
+          text-align: center;
+          padding: 10px;
+          cursor: pointer;
+        }
+
+        td.sun {
+          color: red;
+        }
+        td.sat {
+          color: blue;
+        }
+        td.lastmonth {
+          opacity: 70%;
+          cursor: text;
+        }
+      }
+    }
+  }
 }

@@ -14,17 +14,26 @@
       justify-content: space-evenly;
       align-items: center;
 
-      nav.before {
-        padding: 10px;
-      }
-      span.curMonth {
+      span {
+        flex: 1;
         padding: 10px 40px;
-      }
-      span.nextMonth {
-        padding: 10px 40px;
-      }
-      nav.after {
-        padding: 10px;
+        display: flex;
+        align-items: center;
+        p {
+          margin: 0 auto;
+          margin-bottom: 5px;
+        }
+        nav {
+          padding: 10px;
+          cursor: pointer;
+        }
+
+        nav:hover {
+          color: red;
+        }
+        nav:active {
+          color: blue;
+        }
       }
     }
     .calendars {

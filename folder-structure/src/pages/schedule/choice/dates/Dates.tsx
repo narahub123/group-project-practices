@@ -3,8 +3,19 @@ import Calendar from "./Calendar";
 import "./dates.css";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import { ScheduleProps } from "../Choice";
+import {
+  DestrucDate,
+  MonthCurrent,
+  MonthLater,
+  dateMidFormatter,
+} from "../../../../utils/kakaoMap/time";
 
 const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
+  const today = dateMidFormatter(new Date());
+
+  const curMonth = MonthCurrent(today);
+  const nextMonth = MonthLater(today);
+
   return (
     <div className="dates">
       <div className="explanation">
@@ -27,18 +38,30 @@ const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
       </div>
       <div className="container">
         <div className="months">
-          <nav className="before">
-            <LuChevronLeft />
-          </nav>
-          <span className="curMonth">이번달</span>
-          <span className="nextMonth">다음달</span>
-          <nav className="after">
-            <LuChevronRight />
-          </nav>
+          <span className="curMonth">
+            <nav className="before">
+              <LuChevronLeft />
+            </nav>
+            <p>
+              {`${DestrucDate(curMonth).year}년 ${
+                DestrucDate(curMonth).month + 1
+              }월`}
+            </p>
+          </span>
+          <span className="nextMonth">
+            <p>
+              {`${DestrucDate(nextMonth).year}년 ${
+                DestrucDate(nextMonth).month + 1
+              }월`}
+            </p>
+            <nav className="after">
+              <LuChevronRight />
+            </nav>
+          </span>
         </div>
         <div className="calendars">
-          <Calendar />
-          <Calendar />
+          <Calendar month={curMonth} />
+          <Calendar month={nextMonth} />
         </div>
       </div>
     </div>
