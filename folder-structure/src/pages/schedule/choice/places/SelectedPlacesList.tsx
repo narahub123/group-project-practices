@@ -12,6 +12,8 @@ const SelectedPlacesList = ({
   setContentTypeId,
   selectedPlaces,
   setSelectedPlaces,
+  schedule,
+
   places,
   setPlaces,
 }: SchduleSelectedProps) => {
@@ -51,6 +53,15 @@ const SelectedPlacesList = ({
     const filteredContentIds = selectedPlaces.filter(
       (place) => place !== contentId
     );
+
+    const schedulePlaces = schedule.schedule_detail?.filter(
+      (place) => place.content_id !== contentId
+    );
+
+    setSchedule({
+      ...schedule,
+      schedule_detail: schedulePlaces,
+    });
 
     setSelectedPlaces(filteredContentIds);
     setPlaces(filteredPlaces);

@@ -88,6 +88,8 @@ const Choice = ({
           schedule={schedule}
           places={places}
           setPlaces={setPlaces}
+          selectedPlaces={selectedPlaces}
+          setSelectedPlaces={setSelectedPlaces}
         />
       )}
     </div>

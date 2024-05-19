@@ -114,7 +114,14 @@ const PlacesList = ({
 
   const handleMinus = (contentId: string) => {
     const newPlaces = selectedPlaces.filter((place) => place !== contentId);
+    const schedulePlaces = schedule.schedule_detail?.filter(
+      (place) => place.content_id !== contentId
+    );
 
+    setSchedule({
+      ...schedule,
+      schedule_detail: schedulePlaces,
+    });
     setSelectedPlaces([...newPlaces]);
   };
 

@@ -10,10 +10,39 @@ interface PlanType {
   setSchedule: Dispatch<SetStateAction<ScheduleType>>;
   places: PlaceApiDetailType[];
   setPlaces: (value: PlaceApiDetailType[]) => void;
+  selectedPlaces: string[];
+  setSelectedPlaces: (value: string[]) => void;
 }
 
-const Plan = ({ setSchedule, schedule, places, setPlaces }: PlanType) => {
+const Plan = ({
+  setSchedule,
+  schedule,
+  places,
+  setPlaces,
+  selectedPlaces,
+  setSelectedPlaces,
+}: PlanType) => {
   console.log(schedule.schedule_detail);
+
+  const handleDelete = (contentId: string) => {
+    const filteredPlaces = places.filter(
+      (place) => place.contentid !== contentId
+    );
+
+    const filteredSelectedPlaces = selectedPlaces.filter(
+      (place) => place !== contentId
+    );
+
+    const schedulePlaces = schedule.schedule_detail?.filter(
+      (place) => place.content_id !== contentId
+    );
+    setSchedule({
+      ...schedule,
+      schedule_detail: schedulePlaces,
+    });
+    setPlaces(filteredPlaces);
+    setSelectedPlaces(filteredSelectedPlaces);
+  };
 
   return (
     <div className="planDetail">
@@ -29,7 +58,7 @@ const Plan = ({ setSchedule, schedule, places, setPlaces }: PlanType) => {
                   <DropCard place={place} />
                   <span
                     className="trash"
-                    //   onClick={() => handleDelete(place.contentid)}
+                    onClick={() => handleDelete(place.contentid)}
                   >
                     <LuTrash2 />
                   </span>
