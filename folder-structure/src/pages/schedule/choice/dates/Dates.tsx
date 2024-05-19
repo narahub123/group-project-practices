@@ -13,6 +13,11 @@ import {
 
 const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
   const [today, setToday] = useState<Date>(dateMidFormatter(new Date()));
+  const [start, setStart] = useState<Date | undefined>(undefined);
+  const [end, setEnd] = useState<Date | undefined>(undefined);
+
+  console.log(start);
+  console.log(end);
 
   const startDay = new Date(today);
 
@@ -70,8 +75,22 @@ const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
           </span>
         </div>
         <div className="calendars">
-          <Calendar month={curMonth} />
-          <Calendar month={nextMonth} />
+          <Calendar
+            month={curMonth}
+            start={start}
+            setStart={setStart}
+            end={end}
+            setEnd={setEnd}
+            setSchedule={setSchedule}
+          />
+          <Calendar
+            month={nextMonth}
+            start={start}
+            setStart={setStart}
+            end={end}
+            setEnd={setEnd}
+            setSchedule={setSchedule}
+          />
         </div>
       </div>
     </div>

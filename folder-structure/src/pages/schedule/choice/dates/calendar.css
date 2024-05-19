@@ -19,6 +19,8 @@
           text-align: center;
           padding: 10px;
           cursor: pointer;
+          width: 22px;
+          height: 22px;
         }
 
         td.sun {
@@ -30,6 +32,27 @@
         td.lastmonth {
           opacity: 70%;
           cursor: text;
+          pointer-events: none;
+        }
+        td.active {
+          background-color: black;
+          color: white;
+          border-radius: 30%;
+        }
+        td.possible {
+          background-color: rgba(128, 128, 128, 0.259);
+          color: white;
+          border-radius: 30%;
+        }
+        td.possible:hover {
+          background-color: rgba(128, 128, 128, 0.414);
+          color: white;
+          border-radius: 30%;
+        }
+        td.none:hover {
+          background-color: rgba(128, 128, 128, 0.259);
+          color: white;
+          border-radius: 30%;
         }
       }
     }

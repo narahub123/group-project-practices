@@ -14,7 +14,6 @@ export const MonthLater = (date: Date) =>
   dateMidFormatter(new Date(date.setMonth(date.getMonth() + 1)));
 
 // destructure
-
 export const DestrucDate = (date: Date) => {
   const year = date.getFullYear();
   const month = date.getMonth();
@@ -71,13 +70,7 @@ export const MonthlyDates = (date: Date) => {
   return dates;
 };
 
-// console.log(dateMidFormatter(new Date()));
-
-// console.log(MonthCurrent(new Date()));
-// console.log(MonthLater(new Date()));
-
-// console.log(lastOfMonth(new Date()));
-// console.log(firstOfMonth(new Date()));
-// console.log(WeekOffirstDay(new Date()));
-// console.log(MonthlyDates(new Date()));
-// console.log(MonthlyDates(new Date()));
+export const TenDaysLater = (date: Date) => {
+  const newDate = new Date(date);
+  return dateMidFormatter(new Date(newDate.setDate(newDate.getDate() + 10)));
+};
