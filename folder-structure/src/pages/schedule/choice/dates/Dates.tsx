@@ -16,9 +16,6 @@ const Dates = ({ schedule, setSchedule }: ScheduleProps) => {
   const [start, setStart] = useState<Date | undefined>(undefined);
   const [end, setEnd] = useState<Date | undefined>(undefined);
 
-  console.log(start);
-  console.log(end);
-
   const startDay = new Date(today);
 
   const curMonth = MonthCurrent(startDay);

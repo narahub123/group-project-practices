@@ -97,8 +97,13 @@ const PlacesList = ({
 
   const handlePlus = (contentId: string) => {
     const prevPlaces = selectedPlaces;
+    const schedule_detail = schedule.schedule_detail ?? [];
 
     setSelectedPlaces([...prevPlaces, contentId]);
+    setSchedule({
+      ...schedule,
+      schedule_detail: [...schedule_detail, { content_id: contentId }],
+    });
   };
 
   const handleMinus = (contentId: string) => {

@@ -6,18 +6,20 @@ import "./choice.css";
 import Dates from "./dates/Dates";
 import Places from "./places/Places";
 
+interface ScheduleDetailType {
+  schedule_order?: number;
+  start_time?: Date;
+  end_time?: Date;
+  content_id?: string;
+  content_type_id?: string;
+}
+
 export interface ScheduleType {
   metro_id?: string;
   start_date?: Date;
   end_date?: Date;
   schedule_name?: string;
-  schedule_detail?: {
-    schedule_order?: number;
-    start_time?: Date;
-    end_time?: Date;
-    content_id?: string;
-    content_type_id?: string;
-  };
+  schedule_detail?: ScheduleDetailType[] | undefined;
 }
 
 export interface ScheduleProps extends ScheduleType {
