@@ -8,3 +8,4 @@ export enum contentTypeIds {
   쇼핑 = 38,
   음식점 = 39,
 }
+

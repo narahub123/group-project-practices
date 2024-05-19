@@ -1,0 +1,41 @@
+.planDetail {
+  display: flex;
+  min-width: 600px;
+
+  .planDetailList {
+    border-right: 1px solid black;
+    padding: 0px 15px;
+    height: 100vw;
+    .title {
+      padding: 10px;
+      p {
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+    .list {
+      ul {
+        li {
+          border: 1px solid black;
+          border-radius: 10px;
+          margin: 10px;
+          padding: 10px;
+          div {
+            display: flex;
+            align-items: center;
+
+            .trash {
+              padding-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .kanban {
+    .columns {
+      column {
+      }
+    }
+  }
+}

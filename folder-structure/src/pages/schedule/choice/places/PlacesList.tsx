@@ -7,6 +7,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { AreaCode } from "../../../../data/areacode";
 import { ScheduleProps } from "../Choice";
 import { metros } from "../../../../data/metro";
+import { PlaceApiDetailType } from "./PlaceModal";
 
 export interface SchedulePlus extends ScheduleProps {
   contentTypeId: string;
@@ -15,6 +16,11 @@ export interface SchedulePlus extends ScheduleProps {
   setActive: (value: boolean) => void;
   selectedPlaces: string[];
   setSelectedPlaces: (value: string[]) => void;
+}
+
+export interface SchduleSelectedProps extends SchedulePlus {
+  places: PlaceApiDetailType[];
+  setPlaces: (value: PlaceApiDetailType[]) => void;
 }
 
 const PlacesList = ({

@@ -5,6 +5,8 @@ import "./choice.css";
 
 import Dates from "./dates/Dates";
 import Places from "./places/Places";
+import Plan from "./plan/Plan";
+import { PlaceApiDetailType } from "./places/PlaceModal";
 
 interface ScheduleDetailType {
   schedule_order?: number;
@@ -45,6 +47,7 @@ const Choice = ({
   setSelectedPlaces,
 }: ChoiceProps) => {
   const [schedule, setSchedule] = useState<ScheduleType>({});
+  const [places, setPlaces] = useState<PlaceApiDetailType[]>([]);
   const location = useLocation();
   const { hash } = location;
 
@@ -75,6 +78,16 @@ const Choice = ({
           setContentTypeId={setContentTypeId}
           selectedPlaces={selectedPlaces}
           setSelectedPlaces={setSelectedPlaces}
+          places={places}
+          setPlaces={setPlaces}
+        />
+      )}
+      {hash === "#link4" && (
+        <Plan
+          setSchedule={setSchedule}
+          schedule={schedule}
+          places={places}
+          setPlaces={setPlaces}
         />
       )}
     </div>

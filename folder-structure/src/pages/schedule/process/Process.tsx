@@ -46,7 +46,7 @@ const Process = ({ setContentTypeId }: ProcessType) => {
               숙소 선택
             </Link>
           </li>
-          {/* <li>
+          <li>
             <Link
               to="#link4"
               className={hash === "#link4" ? "link active" : "link"}
@@ -54,7 +54,7 @@ const Process = ({ setContentTypeId }: ProcessType) => {
               STEP4 <br />
               일정 확정
             </Link>
-          </li> */}
+          </li>
         </ul>
       </nav>
     </div>

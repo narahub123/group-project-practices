@@ -1,0 +1,50 @@
+.dropCard {
+  .container {
+    width: 250px;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    justify-content: start;
+
+    span.photo {
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: block;
+      }
+    }
+    span.info {
+      display: flex;
+      flex-direction: column;
+      padding-left: 10px;
+
+      p.name {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 5px 0px;
+      }
+
+      p {
+        display: flex;
+        align-items: center;
+        span {
+          padding: 0 2px;
+          margin: 0 2px;
+        }
+        span.cate {
+          font-size: 12px;
+          background-color: red;
+          border-radius: 5px;
+          color: white;
+        }
+        span.addr {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

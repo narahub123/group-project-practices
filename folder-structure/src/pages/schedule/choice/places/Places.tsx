@@ -3,7 +3,7 @@ import PlacesList from "./PlacesList";
 import SelectedPlacesList from "./SelectedPlacesList";
 import "./places.css";
 import { ScheduleProps } from "../Choice";
-import PlaceModal from "./PlaceModal";
+import PlaceModal, { PlaceApiDetailType } from "./PlaceModal";
 
 export interface PlacesProps extends ScheduleProps {
   contentTypeId: string;
@@ -12,6 +12,8 @@ export interface PlacesProps extends ScheduleProps {
   setContentTypeId: (value: string) => void;
   selectedPlaces: string[];
   setSelectedPlaces: (value: string[]) => void;
+  places: PlaceApiDetailType[];
+  setPlaces: (value: PlaceApiDetailType[]) => void;
 }
 
 const Places = ({
@@ -23,6 +25,8 @@ const Places = ({
   setContentTypeId,
   selectedPlaces,
   setSelectedPlaces,
+  places,
+  setPlaces,
 }: PlacesProps) => {
   return (
     <div className="places">
@@ -45,6 +49,8 @@ const Places = ({
         setContentTypeId={setContentTypeId}
         selectedPlaces={selectedPlaces}
         setSelectedPlaces={setSelectedPlaces}
+        places={places}
+        setPlaces={setPlaces}
       />
     </div>
   );

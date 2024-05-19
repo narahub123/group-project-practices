@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./selectedPlacesList.css";
 import PlaceCard from "./PlaceCard";
 import { LuTrash2 } from "react-icons/lu";
-import { SchedulePlus } from "./PlacesList";
+import { SchduleSelectedProps, SchedulePlus } from "./PlacesList";
 import { PlaceApiDetailType } from "./PlaceModal";
 
 const SelectedPlacesList = ({
@@ -12,9 +12,9 @@ const SelectedPlacesList = ({
   setContentTypeId,
   selectedPlaces,
   setSelectedPlaces,
-}: SchedulePlus) => {
-  const [places, setPlaces] = useState<PlaceApiDetailType[]>([]);
-
+  places,
+  setPlaces,
+}: SchduleSelectedProps) => {
   useEffect(() => {
     const fetchData = async () => {
       const responses = await Promise.all(
