@@ -193,14 +193,14 @@ const Plan = ({
         </header>
         <div className="columns">
           <ul>
-            {dates.map((date, index) => (
-              <li className="column" key={index}>
+            {dates.map((date, column) => (
+              <li className="column" key={column}>
                 <div className="dateContainer">
                   <p className="date">{dateFormatter(date)}</p>
                 </div>
                 <DropIndicator
                   dataRow={"-1"}
-                  dataCol={index.toString()}
+                  dataCol={column.toString()}
                   onDragEnter={handleDragEnter}
                   onDragLeave={handlerDragLeave}
                   onDragOver={handleDragOver}
@@ -208,8 +208,8 @@ const Plan = ({
                 />
                 <div className="columnList">
                   <ul>
-                    {columnPlaces[`column${index}`] &&
-                      columnPlaces[`column${index}`].map((place) => (
+                    {columnPlaces[`column${column}`] &&
+                      columnPlaces[`column${column}`].map((place, index) => (
                         <DropCard
                           place={place}
                           schedule={schedule}
@@ -224,7 +224,8 @@ const Plan = ({
                           onDragLeave={handlerDragLeave}
                           onDragOver={handleDragOver}
                           onDrop={handleDrop}
-                          curCol={index}
+                          curCol={column}
+                          index={index}
                         />
                       ))}
                   </ul>

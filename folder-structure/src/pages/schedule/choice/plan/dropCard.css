@@ -3,58 +3,84 @@
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
-  display: flex;
-  align-items: center;
-  
-  span.container {
-    width: 250px;
+  cursor: grab;
+
+  div {
     display: flex;
-    overflow: hidden;
     align-items: center;
-
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    justify-content: start;
-
-    span.photo {
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        display: block;
+    span.index {
+      padding: 0 5px;
+      p {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-bottom: 1px;
+        text-align: center;
+        background-color: green;
+        color: white;
       }
     }
-    span.info {
+    span.container {
+      width: 250px;
       display: flex;
-      flex-direction: column;
-      padding-left: 10px;
+      overflow: hidden;
+      align-items: center;
 
-      p.name {
-        font-size: 14px;
-        font-weight: bold;
-        padding: 5px 0px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      justify-content: start;
+
+      span.photo {
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 10px;
+          display: block;
+        }
       }
-
-      p {
+      span.info {
         display: flex;
-        align-items: center;
-        span {
-          padding: 0 2px;
-          margin: 0 2px;
-        }
-        span.cate {
-          font-size: 12px;
-          background-color: red;
-          border-radius: 5px;
-          color: white;
-        }
-        span.addr {
+        flex-direction: column;
+        padding-left: 10px;
+
+        p.name {
           font-size: 14px;
+          font-weight: bold;
+          padding: 5px 0px;
+        }
+
+        p {
+          display: flex;
+          align-items: center;
+          span {
+            padding: 0 2px;
+            margin: 0 2px;
+          }
+          span.cate {
+            font-size: 12px;
+            background-color: red;
+            border-radius: 5px;
+            color: white;
+          }
+          span.addr {
+            font-size: 14px;
+          }
         }
       }
+    }
+    span.trash {
+      padding-left: 10px;
+      cursor: pointer;
     }
   }
-  span.trash {
-    padding-left: 10px;
+  .time {
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    input {
+      outline: none;
+      border: none;
+    }
   }
 }

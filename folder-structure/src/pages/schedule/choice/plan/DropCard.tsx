@@ -21,6 +21,7 @@ interface DropCardProps {
   onDragOver: React.DragEventHandler<HTMLDivElement>;
   onDrop: React.DragEventHandler<HTMLDivElement>;
   curCol: number;
+  index: number;
 }
 
 const DropCard = ({
@@ -37,6 +38,7 @@ const DropCard = ({
   onDragOver,
   onDrop,
   curCol,
+  index,
 }: DropCardProps) => {
   const handleDelete = (contentId: string) => {
     const filteredPlaces = places.filter(
@@ -66,32 +68,52 @@ const DropCard = ({
         data-row={place.contentid}
         data-column={curCol}
       >
-        <span className="container">
-          <span className="photo">
-            <img
-              src={
-                place.firstimage === ""
-                  ? metros.find(
-                      (metro) => metro.areaCode.toString() === place.areacode
-                    )?.imgUrl
-                  : place.firstimage
-              }
-              alt="사진"
-            />
+        <div>
+          <span className="index">
+            <p>{index}</p>
           </span>
-          <span className="info">
-            <p className="name">{place.title}</p>
-            <p>
-              <span className="cate">
-                {contentTypeIds[Number(place.contenttypeid)]}
-              </span>
-              <span className="addr">{place.addr1}</span>
-            </p>
+          <span className="container">
+            <span className="photo">
+              <img
+                src={
+                  place.firstimage === ""
+                    ? metros.find(
+                        (metro) => metro.areaCode.toString() === place.areacode
+                      )?.imgUrl
+                    : place.firstimage
+                }
+                alt="사진"
+              />
+            </span>
+            <span className="info">
+              <p className="name">{place.title}</p>
+              <p>
+                <span className="cate">
+                  {contentTypeIds[Number(place.contenttypeid)]}
+                </span>
+                <span className="addr">{place.addr1}</span>
+              </p>
+            </span>
           </span>
-        </span>
-        <span className="trash" onClick={() => handleDelete(place.contentid)}>
-          <LuTrash2 />
-        </span>
+          <span className="trash" onClick={() => handleDelete(place.contentid)}>
+            <LuTrash2 />
+          </span>
+        </div>
+        <div className="time">
+          <input
+            type="time"
+            name="start_time"
+            id="start_time"
+            defaultValue={`${10 + index * 2}:00`}
+          />
+          -
+          <input
+            type="time"
+            name="end_time"
+            id="end_time"
+            defaultValue={`${12 + index * 2}:00`}
+          />
+        </div>
       </li>
       <DropIndicator
         dataRow={place.contentid}
