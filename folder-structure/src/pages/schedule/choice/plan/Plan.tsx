@@ -4,6 +4,11 @@ import { ScheduleType } from "../Choice";
 import { PlaceApiDetailType } from "../places/PlaceModal";
 import DropCard from "./DropCard";
 import { LuTrash2 } from "react-icons/lu";
+import {
+  CalculateDuration,
+  dateFormatter,
+} from "../../../../utils/kakaoMap/time";
+import DropIndicator from "./DropIndicator";
 
 interface PlanType {
   schedule: ScheduleType;
@@ -22,27 +27,9 @@ const Plan = ({
   selectedPlaces,
   setSelectedPlaces,
 }: PlanType) => {
-  console.log(schedule.schedule_detail);
+  const dates = CalculateDuration(schedule.start_date, schedule.end_date);
 
-  const handleDelete = (contentId: string) => {
-    const filteredPlaces = places.filter(
-      (place) => place.contentid !== contentId
-    );
-
-    const filteredSelectedPlaces = selectedPlaces.filter(
-      (place) => place !== contentId
-    );
-
-    const schedulePlaces = schedule.schedule_detail?.filter(
-      (place) => place.content_id !== contentId
-    );
-    setSchedule({
-      ...schedule,
-      schedule_detail: schedulePlaces,
-    });
-    setPlaces(filteredPlaces);
-    setSelectedPlaces(filteredSelectedPlaces);
-  };
+  // console.log(dates);
 
   return (
     <div className="planDetail">
@@ -52,25 +39,48 @@ const Plan = ({
         </div>
         <div className="list">
           <ul>
+            <DropIndicator />
             {places?.map((place) => (
-              <li key={place.contentid}>
-                <div>
-                  <DropCard place={place} />
-                  <span
-                    className="trash"
-                    onClick={() => handleDelete(place.contentid)}
-                  >
-                    <LuTrash2 />
-                  </span>
-                </div>
-              </li>
+              <>
+                <DropCard
+                  place={place}
+                  schedule={schedule}
+                  setSchedule={setSchedule}
+                  places={places}
+                  setPlaces={setPlaces}
+                  selectedPlaces={selectedPlaces}
+                  setSelectedPlaces={setSelectedPlaces}
+                  key={place.contentid}
+                />
+              </>
             ))}
           </ul>
         </div>
       </div>
       <div className="kanban">
+        <header>
+          <p className="title">Detail Plan</p>
+          <p className="duration">
+            {schedule.start_date && schedule.end_date
+              ? `기간 ${dateFormatter(schedule.start_date)}~${dateFormatter(
+                  schedule.end_date
+                )}`
+              : "dates have not yet to be set"}
+          </p>
+        </header>
         <div className="columns">
-          <div className="column">column</div>
+          <ul>
+            {dates.map((date, index) => (
+              <li className="column" key={index}>
+                <div className="dateContainer">
+                  <p className="date">{dateFormatter(date)}</p>
+                </div>
+                <div className="columnList">
+                  <DropIndicator />
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

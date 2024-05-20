@@ -94,3 +94,31 @@ export const dateFormatter = (date: Date | undefined) => {
     return dateFormat;
   } else return "";
 };
+
+// 일정사이의 날짜 구하기
+
+const diff = (date1: Date, date2: Date) =>
+  Math.abs((date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
+
+export const CalculateDuration = (
+  date1: Date | undefined,
+  date2: Date | undefined
+) => {
+  const days = [];
+  if (date1 && date2) {
+    const formattedDate1 = dateMidFormatter(date1);
+    const formattedDate2 = dateMidFormatter(date2);
+
+    const diffs = diff(formattedDate1, formattedDate2);
+
+    for (let i = 0; i <= diffs; i++) {
+      const newDate = new Date(
+        formattedDate1.setDate(formattedDate1.getDate() + i)
+      );
+
+      days.push(newDate);
+    }
+  }
+
+  return days;
+};
