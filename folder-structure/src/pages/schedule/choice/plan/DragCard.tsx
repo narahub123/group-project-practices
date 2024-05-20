@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import "./dropCard.css";
+import "./dragCard.css";
 import { PlaceCardProps } from "../places/PlaceCard";
 import { contentTypeIds } from "../../../../data/contentTypeId";
 import { metros } from "../../../../data/metro";
@@ -7,7 +7,7 @@ import DropIndicator from "./DropIndicator";
 import { LuTrash2 } from "react-icons/lu";
 import { PlaceApiDetailType } from "../places/PlaceModal";
 import { ScheduleType } from "../Choice";
-interface DropCardProps {
+interface DragCardProps {
   place: PlaceCardProps;
   schedule: ScheduleType;
   setSchedule: Dispatch<SetStateAction<ScheduleType>>;
@@ -25,7 +25,7 @@ const DropCard = ({
   setPlaces,
   selectedPlaces,
   setSelectedPlaces,
-}: DropCardProps) => {
+}: DragCardProps) => {
   const handleDelete = (contentId: string) => {
     const filteredPlaces = places.filter(
       (place) => place.contentid !== contentId
@@ -47,7 +47,7 @@ const DropCard = ({
   };
   return (
     <>
-      <li className="dropCard" draggable>
+      <li className="dragCard" draggable>
         <span className="container">
           <span className="photo">
             <img

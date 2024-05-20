@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import "./plan.css";
 import { ScheduleType } from "../Choice";
 import { PlaceApiDetailType } from "../places/PlaceModal";
-import DropCard from "./DropCard";
+import DropCard from "./DragCard";
 import { LuTrash2 } from "react-icons/lu";
 import {
   CalculateDuration,
@@ -75,9 +75,8 @@ const Plan = ({
                 <div className="dateContainer">
                   <p className="date">{dateFormatter(date)}</p>
                 </div>
-                <div className="columnList">
-                  <DropIndicator />
-                </div>
+                <DropIndicator />
+                <div className="columnList"></div>
               </li>
             ))}
           </ul>
