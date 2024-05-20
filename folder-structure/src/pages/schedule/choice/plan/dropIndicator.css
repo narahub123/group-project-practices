@@ -1,5 +1,6 @@
 .dropIndicator {
   margin: 10px;
+  border: 1px solid black;
   p.separator {
     width: 100px;
     border: 1px solid black;

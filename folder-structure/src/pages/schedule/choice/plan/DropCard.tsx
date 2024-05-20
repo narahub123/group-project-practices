@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import "./dragCard.css";
+import "./dropCard.css";
 import { PlaceCardProps } from "../places/PlaceCard";
 import { contentTypeIds } from "../../../../data/contentTypeId";
 import { metros } from "../../../../data/metro";
@@ -7,7 +7,7 @@ import DropIndicator from "./DropIndicator";
 import { LuTrash2 } from "react-icons/lu";
 import { PlaceApiDetailType } from "../places/PlaceModal";
 import { ScheduleType } from "../Choice";
-interface DragCardProps {
+interface DropCardProps {
   place: PlaceCardProps;
   schedule: ScheduleType;
   setSchedule: Dispatch<SetStateAction<ScheduleType>>;
@@ -20,9 +20,10 @@ interface DragCardProps {
   onDragLeave: React.DragEventHandler<HTMLDivElement>;
   onDragOver: React.DragEventHandler<HTMLDivElement>;
   onDrop: React.DragEventHandler<HTMLDivElement>;
+  curCol: number;
 }
 
-const DragCard = ({
+const DropCard = ({
   place,
   setSchedule,
   schedule,
@@ -35,7 +36,8 @@ const DragCard = ({
   onDragLeave,
   onDragOver,
   onDrop,
-}: DragCardProps) => {
+  curCol,
+}: DropCardProps) => {
   const handleDelete = (contentId: string) => {
     const filteredPlaces = places.filter(
       (place) => place.contentid !== contentId
@@ -58,11 +60,11 @@ const DragCard = ({
   return (
     <>
       <li
-        className="dragCard"
+        className="dropCard"
         draggable
         onDragStart={onDragStart}
         data-row={place.contentid}
-        data-column="-1"
+        data-column={curCol}
       >
         <span className="container">
           <span className="photo">
@@ -93,7 +95,7 @@ const DragCard = ({
       </li>
       <DropIndicator
         dataRow={place.contentid}
-        dataCol={"-1"}
+        dataCol={curCol.toString()}
         onDragEnter={onDragEnter}
         onDragLeave={onDragLeave}
         onDragOver={onDragOver}
@@ -103,4 +105,4 @@ const DragCard = ({
   );
 };
 
-export default DragCard;
+export default DropCard;

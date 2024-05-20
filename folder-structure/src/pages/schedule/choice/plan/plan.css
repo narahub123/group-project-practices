@@ -43,6 +43,9 @@
             }
           }
           .columnList {
+            ul {
+              flex-direction: column;
+            }
           }
         }
       }
