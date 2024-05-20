@@ -1,3 +1,5 @@
+export const weekOfDay: string[] = ["일", "월", "화", "수", "목", "금", "토"];
+
 export const dateMidFormatter = (naiveDate: Date) =>
   new Date(naiveDate.setHours(0, 0, 0, 0));
 
@@ -73,4 +75,22 @@ export const MonthlyDates = (date: Date) => {
 export const TenDaysLater = (date: Date) => {
   const newDate = new Date(date);
   return dateMidFormatter(new Date(newDate.setDate(newDate.getDate() + 10)));
+};
+
+export const dateFormatter = (date: Date | undefined) => {
+  if (date) {
+    const year = date?.getFullYear();
+    const month =
+      date?.getMonth() + 1 <= 9
+        ? "0" + (date?.getMonth() + 1)
+        : date?.getMonth() + 1;
+    const dates =
+      date?.getDate() <= 9 ? "0" + date?.getDate() : date?.getDate();
+    const day = date?.getDay();
+
+    const dateFormat =
+      year + "." + month + "." + dates + "(" + weekOfDay[day] + ")";
+
+    return dateFormat;
+  } else return "";
 };

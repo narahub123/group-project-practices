@@ -8,6 +8,9 @@ import {
 } from "../../../../utils/kakaoMap/time";
 import "./calendar.css";
 import { ScheduleType } from "../Choice";
+
+import { weekOfDay } from "../../../../utils/kakaoMap/time";
+
 interface CalendarProps {
   month: Date;
   start: Date | undefined;
@@ -16,8 +19,6 @@ interface CalendarProps {
   setEnd: Dispatch<SetStateAction<Date | undefined>>;
   setSchedule: Dispatch<SetStateAction<ScheduleType>>;
 }
-
-const weekOfDay: string[] = ["일", "월", "화", "수", "목", "금", "토"];
 
 const Calendar = ({
   month,

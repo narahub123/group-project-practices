@@ -8,6 +8,7 @@ import { AreaCode } from "../../../../data/areacode";
 import { ScheduleProps } from "../Choice";
 import { metros } from "../../../../data/metro";
 import { PlaceApiDetailType } from "./PlaceModal";
+import { dateFormatter } from "../../../../utils/kakaoMap/time";
 
 export interface SchedulePlus extends ScheduleProps {
   contentTypeId: string;
@@ -125,11 +126,19 @@ const PlacesList = ({
     setSelectedPlaces([...newPlaces]);
   };
 
+  console.log(schedule.start_date, schedule.end_date);
+
   return (
     <div className="placesList">
       <div className="info">
         {areaName && <p className="name">{areaName?.name}</p>}
-        <p className="duration">2024.05.17(금)~2024.05.18(토)</p>
+        <p className="duration">
+          {schedule.start_date && schedule.end_date
+            ? `${dateFormatter(schedule.start_date)}~${dateFormatter(
+                schedule.end_date
+              )}`
+            : "dates have not yet to be set"}
+        </p>
       </div>
       <div className="search">
         <Search />
