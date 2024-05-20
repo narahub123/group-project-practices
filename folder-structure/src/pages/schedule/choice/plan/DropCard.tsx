@@ -70,7 +70,7 @@ const DropCard = ({
       >
         <div>
           <span className="index">
-            <p>{index}</p>
+            <p>{index + 1}</p>
           </span>
           <span className="container">
             <span className="photo">

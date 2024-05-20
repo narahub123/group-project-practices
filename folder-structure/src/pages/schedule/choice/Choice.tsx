@@ -51,7 +51,7 @@ const Choice = ({
   const location = useLocation();
   const { hash } = location;
 
-  // console.log(schedule);
+  console.log(schedule);
 
   const pathname = useParams();
 

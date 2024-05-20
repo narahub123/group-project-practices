@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./selectedPlacesList.css";
 import PlaceCard from "./PlaceCard";
 import { LuTrash2 } from "react-icons/lu";
