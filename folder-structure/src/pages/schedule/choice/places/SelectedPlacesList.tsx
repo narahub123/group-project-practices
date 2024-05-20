@@ -13,9 +13,10 @@ const SelectedPlacesList = ({
   selectedPlaces,
   setSelectedPlaces,
   schedule,
-
   places,
   setPlaces,
+  scheduleDetail,
+  setScheduleDetail,
 }: SchduleSelectedProps) => {
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +66,11 @@ const SelectedPlacesList = ({
 
     setSelectedPlaces(filteredContentIds);
     setPlaces(filteredPlaces);
+
+    const filteredDetail = scheduleDetail.filter(
+      (detail) => detail.content_id !== contentId
+    );
+    setScheduleDetail([...filteredDetail]);
   };
 
   // console.log(selectedPlaces);

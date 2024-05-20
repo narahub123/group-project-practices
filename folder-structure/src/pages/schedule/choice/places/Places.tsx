@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import PlacesList from "./PlacesList";
 import SelectedPlacesList from "./SelectedPlacesList";
 import "./places.css";
-import { ScheduleProps } from "../Choice";
+import { ScheduleDetailType, ScheduleProps } from "../Choice";
 import PlaceModal, { PlaceApiDetailType } from "./PlaceModal";
 
 export interface PlacesProps extends ScheduleProps {
@@ -14,6 +14,8 @@ export interface PlacesProps extends ScheduleProps {
   setSelectedPlaces: (value: string[]) => void;
   places: PlaceApiDetailType[];
   setPlaces: (value: PlaceApiDetailType[]) => void;
+  scheduleDetail: ScheduleDetailType[];
+  setScheduleDetail: Dispatch<SetStateAction<ScheduleDetailType[]>>;
 }
 
 const Places = ({
@@ -27,6 +29,8 @@ const Places = ({
   setSelectedPlaces,
   places,
   setPlaces,
+  scheduleDetail,
+  setScheduleDetail,
 }: PlacesProps) => {
   return (
     <div className="places">
@@ -39,6 +43,8 @@ const Places = ({
         schedule={schedule}
         selectedPlaces={selectedPlaces}
         setSelectedPlaces={setSelectedPlaces}
+        scheduleDetail={scheduleDetail}
+        setScheduleDetail={setScheduleDetail}
       />
       <SelectedPlacesList
         contentTypeId={contentTypeId}
@@ -51,6 +57,8 @@ const Places = ({
         setSelectedPlaces={setSelectedPlaces}
         places={places}
         setPlaces={setPlaces}
+        scheduleDetail={scheduleDetail}
+        setScheduleDetail={setScheduleDetail}
       />
     </div>
   );

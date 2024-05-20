@@ -8,12 +8,13 @@ import Places from "./places/Places";
 import Plan from "./plan/Plan";
 import { PlaceApiDetailType } from "./places/PlaceModal";
 
-interface ScheduleDetailType {
-  schedule_order?: number;
+export interface ScheduleDetailType {
+  schedule_order?: string;
   start_time?: Date;
   end_time?: Date;
   content_id?: string;
   content_type_id?: string;
+  createdAt?: Date;
 }
 
 export interface ScheduleType {
@@ -47,11 +48,14 @@ const Choice = ({
   setSelectedPlaces,
 }: ChoiceProps) => {
   const [schedule, setSchedule] = useState<ScheduleType>({});
+  const [scheduleDetail, setScheduleDetail] = useState<ScheduleDetailType[]>(
+    []
+  );
   const [places, setPlaces] = useState<PlaceApiDetailType[]>([]);
   const location = useLocation();
   const { hash } = location;
 
-  console.log(schedule);
+  console.log(scheduleDetail);
 
   const pathname = useParams();
 
@@ -80,6 +84,8 @@ const Choice = ({
           setSelectedPlaces={setSelectedPlaces}
           places={places}
           setPlaces={setPlaces}
+          scheduleDetail={scheduleDetail}
+          setScheduleDetail={setScheduleDetail}
         />
       )}
       {hash === "#link4" && (
@@ -90,6 +96,8 @@ const Choice = ({
           setPlaces={setPlaces}
           selectedPlaces={selectedPlaces}
           setSelectedPlaces={setSelectedPlaces}
+          scheduleDetail={scheduleDetail}
+          setScheduleDetail={setScheduleDetail}
         />
       )}
     </div>

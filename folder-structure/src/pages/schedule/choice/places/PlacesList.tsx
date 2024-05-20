@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "./placesList.css";
 import Search from "../../../../components/ui/Search";
 import PlaceCard, { PlaceCardProps } from "./PlaceCard";
 import { PlaceApiType } from "../../../../types/placeTypes";
 import { useLocation, useParams } from "react-router-dom";
 import { AreaCode } from "../../../../data/areacode";
-import { ScheduleProps } from "../Choice";
+import { ScheduleDetailType, ScheduleProps } from "../Choice";
 import { metros } from "../../../../data/metro";
 import { PlaceApiDetailType } from "./PlaceModal";
 import { dateFormatter } from "../../../../utils/kakaoMap/time";
@@ -17,6 +17,8 @@ export interface SchedulePlus extends ScheduleProps {
   setActive: (value: boolean) => void;
   selectedPlaces: string[];
   setSelectedPlaces: (value: string[]) => void;
+  scheduleDetail: ScheduleDetailType[];
+  setScheduleDetail: Dispatch<SetStateAction<ScheduleDetailType[]>>;
 }
 
 export interface SchduleSelectedProps extends SchedulePlus {
@@ -33,6 +35,8 @@ const PlacesList = ({
   setActive,
   selectedPlaces,
   setSelectedPlaces,
+  scheduleDetail,
+  setScheduleDetail,
 }: SchedulePlus) => {
   const [places, setPlaces] = useState<PlaceCardProps[]>([]);
   const [isON, setIsOn] = useState(false);
@@ -124,9 +128,11 @@ const PlacesList = ({
       schedule_detail: schedulePlaces,
     });
     setSelectedPlaces([...newPlaces]);
+    const filteredDetail = scheduleDetail.filter(
+      (detail) => detail.content_id !== contentId
+    );
+    setScheduleDetail([...filteredDetail]);
   };
-
-  console.log(schedule.start_date, schedule.end_date);
 
   return (
     <div className="placesList">

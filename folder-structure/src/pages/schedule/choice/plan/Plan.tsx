@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import "./plan.css";
-import { ScheduleType } from "../Choice";
+import { ScheduleDetailType, ScheduleType } from "../Choice";
 import { PlaceApiDetailType } from "../places/PlaceModal";
 import DragCard from "./DragCard";
 import { LuTrash2 } from "react-icons/lu";
@@ -18,6 +18,8 @@ interface PlanType {
   setPlaces: (value: PlaceApiDetailType[]) => void;
   selectedPlaces: string[];
   setSelectedPlaces: (value: string[]) => void;
+  scheduleDetail: ScheduleDetailType[];
+  setScheduleDetail: Dispatch<SetStateAction<ScheduleDetailType[]>>;
 }
 
 interface ColumnPlaces {
@@ -31,12 +33,14 @@ const Plan = ({
   setPlaces,
   selectedPlaces,
   setSelectedPlaces,
+  scheduleDetail,
+  setScheduleDetail,
 }: PlanType) => {
   const [columnPlaces, setColumnPlaces] = useState<ColumnPlaces>({});
 
-  console.log(places);
+  // console.log(places);
 
-  console.log(columnPlaces);
+  // console.log(columnPlaces);
 
   const dates = CalculateDuration(schedule.start_date, schedule.end_date);
 
@@ -121,6 +125,67 @@ const Plan = ({
               ...prevColumnPlaces,
               [`column${curCol}`]: [...curFilteredPlaces],
             }));
+
+          if (curCol === "-1") {
+            const updateDetail = {
+              content_id: curRow,
+              schedule_order: goalCol,
+              start_time: new Date(dates[Number(goalCol)].setHours(10)),
+              end_time: new Date(dates[Number(goalCol)].setHours(12)),
+              createdAt: new Date(),
+            };
+
+            // actually not necessary
+            const restDetails = scheduleDetail.filter(
+              (detail) => detail.content_id !== curRow
+            );
+
+            const sameColDetails = restDetails
+              .filter((detail) => detail.schedule_order === goalCol)
+              .map((detail) => ({
+                ...detail,
+                createdAt: new Date(),
+              }));
+
+            const diffColDetails = restDetails.filter(
+              (detail) => detail.schedule_order !== goalCol
+            );
+
+            setScheduleDetail((preScheduleDetail) => [
+              updateDetail,
+              ...sameColDetails,
+              ...diffColDetails,
+            ]);
+          } else {
+            const currentDetail = scheduleDetail.find(
+              (detail) => detail.content_id === curRow
+            );
+            const restDetails = scheduleDetail.filter(
+              (detail) => detail.content_id !== curRow
+            );
+            const sameColDetails = restDetails
+              .filter((detail) => detail.schedule_order === goalCol)
+              .map((detail) => ({
+                ...detail,
+                createdAt: new Date(),
+              }));
+
+            const diffColDetails = restDetails.filter(
+              (detail) => detail.schedule_order !== goalCol
+            );
+            console.log(currentDetail);
+            setScheduleDetail([
+              {
+                ...currentDetail,
+                schedule_order: goalCol,
+                start_time: new Date(dates[Number(goalCol)].setHours(10)),
+                end_time: new Date(dates[Number(goalCol)].setHours(12)),
+                createdAt: new Date(),
+              },
+              ...sameColDetails,
+              ...diffColDetails,
+            ]);
+          }
         } else {
           const beforePlaces = goalPlaces.slice(0, Number(goalRow));
           const afterPlaces = goalPlaces.slice(Number(goalRow));
@@ -137,6 +202,97 @@ const Plan = ({
               ...prevColumnPlaces,
               [`column${curCol}`]: [...curFilteredPlaces],
             }));
+
+          if (curCol === "-1") {
+            // actually not necessary
+            const restDetails = scheduleDetail.filter(
+              (detail) => detail.content_id !== curRow
+            );
+
+            const sameColDetails = restDetails.filter(
+              (detail) => detail.schedule_order === goalCol
+            );
+
+            const index = sameColDetails.findIndex(
+              (detail) => detail.content_id === goalRow
+            );
+            const sameBeforeDetails = sameColDetails
+              .slice(0, index)
+              .map((detail) => ({
+                ...detail,
+                createdAt: new Date(),
+              }));
+            const updateDetail = {
+              content_id: curRow,
+              schedule_order: goalCol,
+              start_time: new Date(dates[Number(goalCol)].setHours(10)),
+              end_time: new Date(dates[Number(goalCol)].setHours(12)),
+              createdAt: new Date(),
+            };
+            const sameafterDetails = sameColDetails
+              .slice(index)
+              .map((detail) => ({
+                ...detail,
+                createdAt: new Date(),
+              }));
+
+            const diffColDetails = restDetails.filter(
+              (detail) => detail.schedule_order !== goalCol
+            );
+
+            setScheduleDetail([
+              ...sameBeforeDetails,
+              updateDetail,
+              ...sameafterDetails,
+              ...diffColDetails,
+            ]);
+          } else {
+            const restDetails = scheduleDetail.filter(
+              (detail) => detail.content_id !== curRow
+            );
+
+            const sameColDetails = restDetails.filter(
+              (detail) => detail.content_id === curCol
+            );
+
+            const diffColDetails = restDetails.filter(
+              (detail) => detail.content_id !== curRow
+            );
+
+            const index = diffColDetails.findIndex(
+              (detail) => detail.content_id === goalRow
+            );
+
+            const diffBeforeDetails = diffColDetails
+              .slice(0, index)
+              .map((detail) => ({
+                ...detail,
+                createdAt: new Date(),
+              }));
+
+            const currentDetail = scheduleDetail.find(
+              (detail) => detail.content_id === curRow
+            );
+
+            const diffAfterDetails = diffColDetails
+              .slice(index)
+              .map((detail) => ({
+                ...detail,
+                createdAt: new Date(),
+              }));
+
+            console.log(currentDetail);
+            setScheduleDetail([
+              ...diffBeforeDetails,
+              {
+                ...currentDetail,
+                schedule_order: goalCol,
+                createdAt: new Date(),
+              },
+              ...diffAfterDetails,
+              ...sameColDetails,
+            ]);
+          }
         }
       }
     }
