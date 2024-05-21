@@ -22,8 +22,12 @@
     padding: 0px 10px;
     header {
       padding: 10px;
-      p.title {
+      .title {
         font-weight: bold;
+        input {
+          width: 190px;
+          padding: 5px;
+        }
       }
       p.duration {
         font-size: 14px;

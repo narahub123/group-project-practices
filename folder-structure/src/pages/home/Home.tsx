@@ -4,6 +4,7 @@ import MetroCard from "./MetroCard";
 import MetroModal from "./MetroModal";
 import { MetroType, metros } from "../../data/metro";
 import "./home.css";
+import { useLocation, useParams } from "react-router-dom";
 
 const Home = () => {
   const [active, setActive] = useState(false);
@@ -13,6 +14,16 @@ const Home = () => {
 
   console.log(active);
 
+  const params = new URLSearchParams(document.location.search);
+
+  const search = params.get("search");
+
+  console.log(search);
+
+  const filteredMetros = metros.filter((metro) =>
+    metro.name?.includes(search || "")
+  );
+
   return (
     <div className="home">
       {active && metro && <MetroModal metro={metro} setActive={setActive} />}
@@ -21,7 +32,7 @@ const Home = () => {
       </div>
       <div className="container">
         <ul>
-          {metros.map((metro) => (
+          {filteredMetros.map((metro) => (
             <MetroCard
               key={metro.areaCode}
               {...metro}

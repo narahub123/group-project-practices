@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import "./plan.css";
 import { ScheduleDetailType, ScheduleType } from "../Choice";
 import { PlaceApiDetailType } from "../places/PlaceModal";
@@ -37,6 +37,19 @@ const Plan = ({
   setScheduleDetail,
 }: PlanType) => {
   const [columnPlaces, setColumnPlaces] = useState<ColumnPlaces>({});
+  const [title, setTitle] = useState("");
+
+  const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    const q = e.target.value;
+    setTitle(q);
+    setSchedule({
+      ...schedule,
+      schedule_name: q,
+    });
+  };
+
+  console.log(schedule);
 
   // console.log(places);
 
@@ -151,7 +164,7 @@ const Plan = ({
               (detail) => detail.schedule_order !== goalCol
             );
 
-            setScheduleDetail((preScheduleDetail) => [
+            setScheduleDetail([
               updateDetail,
               ...sameColDetails,
               ...diffColDetails,
@@ -338,7 +351,13 @@ const Plan = ({
       </div>
       <div className="kanban">
         <header>
-          <p className="title">Detail Plan</p>
+          <div className="title">
+            <input
+              type="text"
+              placeholder="이번 여행의 이름을 정해주세요"
+              onChange={(e) => handleTitle(e)}
+            />
+          </div>
           <p className="duration">
             {schedule.start_date && schedule.end_date
               ? `기간 ${dateFormatter(schedule.start_date)}~${dateFormatter(
