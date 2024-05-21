@@ -1,10 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import UserNavbar from "../components/UserNavbar";
+import "./userlayout.css";
 
 const UserLayout = () => {
   return (
-    <div>
+    <div className="userPage">
       <UserNavbar />
       <Outlet />
     </div>

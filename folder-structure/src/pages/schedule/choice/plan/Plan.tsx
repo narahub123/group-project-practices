@@ -22,7 +22,7 @@ interface PlanType {
   setScheduleDetail: Dispatch<SetStateAction<ScheduleDetailType[]>>;
 }
 
-interface ColumnPlaces {
+export interface ColumnPlaces {
   [key: string]: PlaceApiDetailType[];
 }
 

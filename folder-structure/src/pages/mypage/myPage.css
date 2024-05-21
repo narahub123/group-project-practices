@@ -1,0 +1,17 @@
+.myPage {
+  width: 700px;
+  display: flex;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      padding: 50px;
+      color: white;
+      background-color: gray;
+      margin: 10px;
+    }
+    li:hover {
+      background-color: black;
+    }
+  }
+}

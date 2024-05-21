@@ -13,19 +13,19 @@ export const getAllSchedules = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const sessionToken = req.cookies["ANTONIO-AUTH"];
-  if (!sessionToken) {
-    return res.sendStatus(403);
-  }
+  // const sessionToken = req.cookies["ANTONIO-AUTH"];
+  // if (!sessionToken) {
+  //   return res.sendStatus(403);
+  // }
 
-  const existingUser = await getUserBySessionToken(sessionToken);
+  // const existingUser = await getUserBySessionToken(sessionToken);
 
-  const id =
-    existingUser._id.toString() === "관리자"
-      ? null
-      : existingUser._id.toString();
+  // const id =
+  //   existingUser._id.toString() === "관리자"
+  //     ? null
+  //     : existingUser._id.toString();
 
-  const schedules = await getSchedulesById(id);
+  const schedules = await getSchedulesById();
 
   if (!schedules) {
     return res.sendStatus(404);
@@ -38,9 +38,9 @@ export const getSchedule = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const { id } = req.params;
+  const { schedule_id } = req.params;
 
-  const schedule = await getScheduleById(id);
+  const schedule = await getScheduleById(schedule_id);
 
   if (!schedule) {
     return res.sendStatus(403);

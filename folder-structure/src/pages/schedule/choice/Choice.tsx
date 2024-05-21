@@ -18,6 +18,7 @@ export interface ScheduleDetailType {
 }
 
 export interface ScheduleType {
+  schedule_id?: string;
   metro_id?: string;
   start_date?: Date;
   end_date?: Date;

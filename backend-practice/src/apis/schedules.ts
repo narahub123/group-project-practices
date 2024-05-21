@@ -1,11 +1,14 @@
 import { ScheduleModel } from "../db/schedules";
 
 // 조건에 맞는 모든 일정 가져오기
-export const getSchedulesById = (user_id?: string) =>
-  ScheduleModel.find({ _id: user_id });
+export const getSchedulesById = () =>
+  // ScheduleModel.find({ _id: user_id });
+  ScheduleModel.find({});
 
 // 조건에 맞는 일정 가져오기
 export const getScheduleById = (schedule_id: string) => {
+  console.log(schedule_id);
+
   return ScheduleModel.findById({ _id: schedule_id });
 };
 

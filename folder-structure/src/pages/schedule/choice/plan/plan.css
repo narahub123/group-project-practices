@@ -47,8 +47,13 @@
             }
           }
           .columnList {
+            height: 100vh;
             ul {
-              flex-direction: column;
+              li {
+                padding: 10px;
+                background-color: black;
+                color: white;
+              }
             }
           }
         }
