@@ -10,8 +10,11 @@ export const getScheduleById = (schedule_id: string) => {
 };
 
 // 일정 만들기
-export const createScheduleByValue = (values: Record<string, any>) => {
-  new ScheduleModel(values).save().then((schedule) => schedule.toObject());
+export const createScheduleByValue = async (values: Record<string, any>) => {
+  const schedule = new ScheduleModel(values);
+
+  const savedSchedule = await schedule.save();
+  return savedSchedule;
 };
 
 // 일정 삭제하기

@@ -5,7 +5,7 @@ import PlaceCard, { PlaceCardProps } from "./PlaceCard";
 import { PlaceApiType } from "../../../../types/placeTypes";
 import { useLocation, useParams } from "react-router-dom";
 import { AreaCode } from "../../../../data/areacode";
-import { ScheduleDetailType, ScheduleProps } from "../Choice";
+import { ScheduleDetailType, ScheduleProps, ScheduleType } from "../Choice";
 import { metros } from "../../../../data/metro";
 import { PlaceApiDetailType } from "./PlaceModal";
 import { dateFormatter } from "../../../../utils/kakaoMap/time";
@@ -17,6 +17,8 @@ export interface SchedulePlus extends ScheduleProps {
   setActive: (value: boolean) => void;
   selectedPlaces: string[];
   setSelectedPlaces: (value: string[]) => void;
+  schedule: ScheduleType;
+  setSchedule: Dispatch<SetStateAction<ScheduleType>>;
   scheduleDetail: ScheduleDetailType[];
   setScheduleDetail: Dispatch<SetStateAction<ScheduleDetailType[]>>;
 }

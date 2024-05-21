@@ -37,6 +37,12 @@ export interface ChoiceProps {
   setContentTypeId: (value: string) => void;
   selectedPlaces: string[];
   setSelectedPlaces: (value: string[]) => void;
+  // places: PlaceApiDetailType[];
+  // setPlaces: (value: PlaceApiDetailType[]) => void;
+  schedule: ScheduleType;
+  setSchedule: Dispatch<SetStateAction<ScheduleType>>;
+  scheduleDetail: ScheduleDetailType[];
+  setScheduleDetail: Dispatch<SetStateAction<ScheduleDetailType[]>>;
 }
 
 const Choice = ({
@@ -46,11 +52,11 @@ const Choice = ({
   setContentTypeId,
   selectedPlaces,
   setSelectedPlaces,
+  schedule,
+  setSchedule,
+  scheduleDetail,
+  setScheduleDetail,
 }: ChoiceProps) => {
-  const [schedule, setSchedule] = useState<ScheduleType>({});
-  const [scheduleDetail, setScheduleDetail] = useState<ScheduleDetailType[]>(
-    []
-  );
   const [places, setPlaces] = useState<PlaceApiDetailType[]>([]);
   const location = useLocation();
   const { hash } = location;

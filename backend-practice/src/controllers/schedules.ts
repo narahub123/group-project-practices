@@ -54,15 +54,19 @@ export const createSchedule = async (
   res: express.Response
 ) => {
   try {
-    const { values } = req.body;
+    const values = req.body;
+
+    console.log(values);
 
     if (!values) {
       return res.sendStatus(403);
     }
 
-    const schedule = createScheduleByValue(values);
+    const schedule = await createScheduleByValue(values);
 
-    return res.sendStatus(201).json(schedule);
+    console.log("return", schedule);
+
+    return res.status(201).json(schedule);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);

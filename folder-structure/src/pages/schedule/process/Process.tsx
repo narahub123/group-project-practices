@@ -1,13 +1,40 @@
-import React from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useEffect } from "react";
 import "./process.css";
 import { Link, useLocation } from "react-router-dom";
+import { ScheduleDetailType, ScheduleType } from "../choice/Choice";
+import Button from "../../../components/ui/Button";
+import axios from "axios";
 
 interface ProcessType {
-  setContentTypeId: (value: string) => void;
+  schedule: ScheduleType;
+  setSchedule: Dispatch<SetStateAction<ScheduleType>>;
+  scheduleDetail: ScheduleDetailType[];
 }
-const Process = ({ setContentTypeId }: ProcessType) => {
+const Process = ({ schedule, setSchedule, scheduleDetail }: ProcessType) => {
   const location = useLocation();
   const { hash } = location;
+
+  useEffect(() => {
+    setSchedule({
+      ...schedule,
+      schedule_detail: scheduleDetail,
+    });
+  }, [scheduleDetail]);
+
+  const handleSubmit = (
+    e: FormEvent<HTMLFormElement>,
+    values: ScheduleType
+  ) => {
+    e.preventDefault();
+    console.log(values);
+
+    axios
+      .post(`http://localhost:8080/schedules`, values)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error.response.data));
+  };
 
   return (
     <div className="process">
@@ -54,6 +81,11 @@ const Process = ({ setContentTypeId }: ProcessType) => {
               STEP4 <br />
               일정 확정
             </Link>
+          </li>
+          <li>
+            <form onSubmit={(e) => handleSubmit(e, schedule)}>
+              <Button text="일정 등록하기" />
+            </form>
           </li>
         </ul>
       </nav>

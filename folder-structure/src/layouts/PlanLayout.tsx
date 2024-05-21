@@ -1,5 +1,8 @@
 import Process from "../pages/schedule/process/Process";
-import Choice from "../pages/schedule/choice/Choice";
+import Choice, {
+  ScheduleDetailType,
+  ScheduleType,
+} from "../pages/schedule/choice/Choice";
 
 import "./planLayout.css";
 import PlaceModal from "../pages/schedule/choice/places/PlaceModal";
@@ -10,6 +13,13 @@ const PlanLayout = () => {
   const [active, setActive] = useState(false);
   const [contentId, setContentId] = useState("");
   const [contentTypeId, setContentTypeId] = useState("1");
+  const [schedule, setSchedule] = useState<ScheduleType>({});
+  const [scheduleDetail, setScheduleDetail] = useState<ScheduleDetailType[]>(
+    []
+  );
+
+  console.log(schedule);
+  console.log(scheduleDetail);
 
   const [selectedPlaces, setSelectedPlaces] = useState<string[]>([]);
 
@@ -23,7 +33,11 @@ const PlanLayout = () => {
           active={active}
         />
       )}
-      <Process setContentTypeId={setContentTypeId} />
+      <Process
+        schedule={schedule}
+        setSchedule={setSchedule}
+        scheduleDetail={scheduleDetail}
+      />
       <Choice
         contentTypeId={contentTypeId}
         setActive={setActive}
@@ -31,6 +45,10 @@ const PlanLayout = () => {
         setContentTypeId={setContentTypeId}
         selectedPlaces={selectedPlaces}
         setSelectedPlaces={setSelectedPlaces}
+        scheduleDetail={scheduleDetail}
+        setScheduleDetail={setScheduleDetail}
+        schedule={schedule}
+        setSchedule={setSchedule}
       />
       <KakaoMap selectedPlaces={selectedPlaces} />
     </div>

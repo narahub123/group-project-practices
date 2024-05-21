@@ -12,7 +12,7 @@ import { isAuthenticated, isOwner } from "../middlewares/index";
 export default (router: express.Router) => {
   router.get("/schedules", isAuthenticated, getAllSchedules);
   router.get("/schedules/:id", isAuthenticated, isOwner, getSchedule);
-  router.post("/schedules", isAuthenticated, isOwner, createSchedule);
+  router.post("/schedules", createSchedule);
   router.patch("/schedules/:id", isAuthenticated, isOwner, updateSchedule);
   router.delete("/schedules/:id", isAuthenticated, isOwner, deleteSchedule);
 };
