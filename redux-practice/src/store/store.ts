@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { PersonSlice } from "./personSlice";
+import { PersonSlice } from "./features/personSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 export const store = configureStore({

@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppSelector } from "../store/features/store";
+import { useAppSelector } from "../store/store";
 
 const List = () => {
   // fetch list of persons
