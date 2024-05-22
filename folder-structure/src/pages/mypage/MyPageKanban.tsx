@@ -4,7 +4,7 @@ import "./mypagekanban.css";
 import { useParams } from "react-router-dom";
 
 import { CalculateDuration, dateFormatter } from "../../utils/kakaoMap/time";
-import { ScheduleDetailType, ScheduleType } from "../schedule/choice/Choice";
+import { ScheduleDetailType, ScheduleType } from "../../types/schedules";
 
 interface ColumnPlaces {
   [key: string]: ScheduleDetailType[];

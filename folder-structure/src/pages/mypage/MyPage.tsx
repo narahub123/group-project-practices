@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./myPage.css";
 import { Link, Outlet } from "react-router-dom";
-import { ScheduleDetailType, ScheduleType } from "../schedule/choice/Choice";
+import { ScheduleDetailType, ScheduleType } from "../../types/schedules";
 
 interface DBDetailType extends ScheduleDetailType {
   _id: string;
