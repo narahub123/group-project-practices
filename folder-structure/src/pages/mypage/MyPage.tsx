@@ -59,7 +59,6 @@ const MyPage = () => {
           </Link>
         ))}
       </ul>
-      <Outlet />
     </div>
   );
 };

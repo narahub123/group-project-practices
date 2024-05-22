@@ -1,6 +1,6 @@
 .planDetail {
   display: flex;
-  min-width: 600px;
+  min-width: 600;
 
   .planDetailList {
     border-right: 1px solid black;
@@ -37,6 +37,7 @@
     .columns {
       ul {
         display: flex;
+
         li.column {
           padding: 10px;
           .dateContainer {
@@ -49,10 +50,9 @@
           .columnList {
             height: 100vh;
             ul {
+              flex-direction: column;
               li {
                 padding: 10px;
-                background-color: black;
-                color: white;
               }
             }
           }

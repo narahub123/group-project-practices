@@ -7,7 +7,7 @@ import MyPage from "./pages/mypage/MyPage";
 import Admin from "./pages/admin/Admin";
 import PlanLayout from "./layouts/PlanLayout";
 import UserLayout from "./layouts/UserLayout";
-import Kanban from "./pages/mypage/Kanban";
+import MyPageKanban from "./pages/mypage/MyPageKanban";
 
 const App = () => {
   return (
@@ -16,9 +16,11 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/community" element={<Community />} />
         <Route element={<UserLayout />}>
-          <Route path="/mypage" element={<MyPage />}>
-            <Route path="schedules/:scheduleId" element={<Kanban />}></Route>
-          </Route>
+          <Route path="/mypage" element={<MyPage />}></Route>
+          <Route
+            path="/mypage/schedules/:scheduleId"
+            element={<MyPageKanban />}
+          ></Route>
           <Route path="/admin" element={<Admin />} />
         </Route>
       </Route>

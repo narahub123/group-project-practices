@@ -1,5 +1,6 @@
-.kanban {
+.myPageKanban {
   padding: 0px 10px;
+  width: 100%;
   header {
     padding: 10px;
 
@@ -19,12 +20,12 @@
   .columns {
     ul {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: row;
+
+      align-items: start;
       .column {
         padding: 10px;
         .dateContainer {
-          border-bottom: 1px solid gray;
           padding: 10px;
           p.date {
             font-size: 14px;
@@ -35,9 +36,9 @@
             flex: 1;
             li {
               padding: 10px;
-              color: black;
-              background-color: blue;
+
               p {
+                color: black;
               }
             }
           }

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./kanban.css";
+import "./mypagekanban.css";
 import { useParams } from "react-router-dom";
-import DropCard from "../schedule/choice/plan/DropCard";
-import DropIndicator from "../schedule/choice/plan/DropIndicator";
+
 import { CalculateDuration, dateFormatter } from "../../utils/kakaoMap/time";
 import { ScheduleDetailType, ScheduleType } from "../schedule/choice/Choice";
 
@@ -11,7 +10,7 @@ interface ColumnPlaces {
   [key: string]: ScheduleDetailType[];
 }
 
-const Kanban = () => {
+const MyPageKanban = () => {
   const [schedule, setSchedule] = useState<ScheduleType>();
 
   const params = useParams();
@@ -28,7 +27,6 @@ const Kanban = () => {
     axios
       .get(`http://localhost:8080/schedules/${params.scheduleId}`)
       .then((response) => {
-        console.log(response.data);
         setSchedule(response.data);
       })
       .catch((error) => console.log(error.response.data));
@@ -37,7 +35,7 @@ const Kanban = () => {
   console.log(schedule?.schedule_detail);
 
   return (
-    <div className="kanban">
+    <div className="myPageKanban">
       <header>
         <div className="title">
           <input
@@ -64,17 +62,18 @@ const Kanban = () => {
               </div>
 
               <div className="columnList">
-                <ul>
-                  {schedule?.schedule_detail
-                    ?.filter(
-                      (detail) => detail.schedule_order === column.toString()
-                    )
-                    .map((c) => (
+                {schedule?.schedule_detail
+                  ?.filter(
+                    (detail) =>
+                      detail.schedule_order?.toString() === column.toString()
+                  )
+                  .map((c) => (
+                    <ul>
                       <li>
                         <p>{c.content_id}</p>
                       </li>
-                    ))}
-                </ul>
+                    </ul>
+                  ))}
               </div>
             </li>
           ))}
@@ -84,4 +83,4 @@ const Kanban = () => {
   );
 };
 
-export default Kanban;
+export default MyPageKanban;
