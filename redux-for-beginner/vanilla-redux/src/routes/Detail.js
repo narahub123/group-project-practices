@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteToDo } from "../store";
+import { remove } from "../store";
 
 const Detail = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const Detail = () => {
 
   const onClick = () => {
     console.log(id);
-    dispatch(deleteToDo(parseInt(id)));
+    dispatch(remove(parseInt(id)));
     navigate("/");
   };
 

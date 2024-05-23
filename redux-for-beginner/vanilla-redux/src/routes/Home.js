@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToDo, deleteToDo } from "../store";
+import { add, remove } from "../store";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -18,12 +18,12 @@ const Home = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addToDo(text));
+    dispatch(add(text));
     setText("");
   };
 
   const onClick = (id) => {
-    dispatch(deleteToDo(id));
+    dispatch(remove(id));
   };
   return (
     <>
