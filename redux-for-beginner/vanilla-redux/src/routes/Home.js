@@ -35,11 +35,9 @@ const Home = () => {
       <ul>
         {toDos.map((toDo) => {
           return (
-            <li>
-              <Link to={`/${toDo.id}`}>
-                {toDo.text}{" "}
-                <button onClick={(id) => onClick(toDo.id)}>DEL</button>
-              </Link>
+            <li key={toDo.id}>
+              <Link to={`/${toDo.id}`}>{toDo.text}</Link>
+              <button onClick={(id) => onClick(toDo.id)}>DEL</button>
             </li>
           );
         })}
