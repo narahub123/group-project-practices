@@ -3,7 +3,7 @@ import { crateStore, createStore } from "redux";
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-// actior creator
+// action creator
 export const addToDo = (text) => {
   return {
     type: ADD,
