@@ -43,3 +43,24 @@ export const getPlaceById = async (contentId: string) => {
     console.log(error);
   }
 };
+
+export const getPlaceByKeyword = async (
+  keyword: string,
+  areaCode: string,
+  contentTypeId: string,
+  pageNo: string
+) => {
+  const numOfRows = 10;
+
+  const apiUrl = `http://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${apiKey}&MobileApp=AppTest&MobileOS=ETC&_type=json&listYN=Y&arrange=A&pageNo=${pageNo}&numOfRows=${numOfRows}&contentTypeId=${contentTypeId}&keyword=${keyword}&areaCode=${areaCode}`;
+
+  console.log(apiUrl);
+
+  try {
+    const res = await axios.get(apiUrl);
+
+    return res.data.response.body.items.item;
+  } catch (error) {
+    console.log(error);
+  }
+};

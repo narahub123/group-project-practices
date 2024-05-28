@@ -18,7 +18,7 @@ export enum AreaCode {
   "제주도",
 }
 
-export enum ContentTypeId {
+export enum ContentTypeIds {
   "관광지" = 12,
   "문화시설" = 14,
   "축제공연행사" = 15,

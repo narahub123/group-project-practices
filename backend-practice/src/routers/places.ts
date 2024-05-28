@@ -3,6 +3,7 @@ import express from "express";
 import {
   getAllPlacesByKeywordNContentTypeId,
   getPlaceByContentId,
+  getPlaceByKeywordContentTypeIdAreaCode,
 } from "../controllers/places";
 
 export default (router: express.Router) => {
@@ -11,4 +12,8 @@ export default (router: express.Router) => {
     getAllPlacesByKeywordNContentTypeId
   );
   router.get("/places/:contentId", getPlaceByContentId);
+  router.get(
+    "/places/search/:areaCode/:contentTypeId/:keyword/:pageNo",
+    getPlaceByKeywordContentTypeIdAreaCode
+  );
 };
