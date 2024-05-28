@@ -7,10 +7,11 @@ const apiKey = process.env.TOUR_API_KEY;
 
 export const getPlacesByKeyAndId = async (
   areaCode: string,
-  contentTypeId: string
+  contentTypeId: string,
+  pageNo: string
 ) => {
   // 변경 가능한 파라미터들
-  const pageNo = 1;
+
   const numOfRows = 8;
 
   contentTypeId === "1" ? "" : contentTypeId;

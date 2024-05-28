@@ -7,7 +7,7 @@ import {
 
 export default (router: express.Router) => {
   router.get(
-    "/places/:areaCode/:contentTypeId",
+    "/places/:areaCode/:contentTypeId/:pageNo",
     getAllPlacesByKeywordNContentTypeId
   );
   router.get("/places/:contentId", getPlaceByContentId);
