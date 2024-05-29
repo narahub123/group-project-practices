@@ -59,6 +59,9 @@ export const getPlaceByKeyword = async (
   try {
     const res = await axios.get(apiUrl);
 
+    if (res.data.response.body.items === "") {
+      return [];
+    }
     return res.data.response.body.items.item;
   } catch (error) {
     console.log(error);
