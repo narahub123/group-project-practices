@@ -52,7 +52,7 @@ app.post("/api/refresh", (req, res) => {
 
 const generateAccessToken = (user) => {
   return jwt.sign({ id: user.id, isAdmin: user.isAdmin }, "mySecretKey", {
-    expiresIn: "30s",
+    expiresIn: "20m",
   });
 };
 const generateRefreshToken = (user) => {
@@ -89,7 +89,7 @@ app.post("/api/login", (req, res) => {
 // middleware : verify token whether it is or not
 // and whether it is valid or not
 const verify = (req, res, next) => {
-  const authHeader = req.headers.authrization;
+  const authHeader = req.headers.authorization;
   if (authHeader) {
     const token = authHeader.split(" ")[1];
 
@@ -106,6 +106,14 @@ const verify = (req, res, next) => {
   }
 };
 
+// 로그아웃
+app.post("/api/logout", verify, (req, res) => {
+  const refreshToken = req.body.token;
+  refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+  res.status(200).json("You logged out successfully");
+});
+
+// 유저 삭제
 app.delete("/api/users/:userId", verify, (req, res) => {
   if (req.user.id === req.params.userId || req.user.isAdmin) {
     res.status(200).json("User has been deleted");
