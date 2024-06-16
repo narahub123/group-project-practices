@@ -50,7 +50,7 @@ export const getPlaceByKeyword = async (
   contentTypeId: string,
   pageNo: string
 ) => {
-  const numOfRows = 10;
+  const numOfRows = 8;
 
   const apiUrl = `http://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${apiKey}&MobileApp=AppTest&MobileOS=ETC&_type=json&listYN=Y&arrange=A&pageNo=${pageNo}&numOfRows=${numOfRows}&contentTypeId=${contentTypeId}&keyword=${keyword}&areaCode=${areaCode}`;
 

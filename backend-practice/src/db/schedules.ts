@@ -7,14 +7,14 @@ export const ScheduleSchema = new mongoose.Schema({
   start_date: { type: Date, required: true },
   end_date: { type: Date, required: true },
   createdAt: { type: Date, required: false },
-  schedule_name: { type: String, required: true },
-  schedule_detail: [
+  schedule_title: { type: String, required: true },
+  schedule_details: [
     {
-      schedule_order: { type: Number, required: true },
-      start_time: { type: Date, required: true },
-      end_time: { type: Date, requierd: true },
-      content_id: { type: String, required: true },
-      createdAt: { type: Date, required: true },
+      schedule_order: { type: Number, required: false },
+      start_time: { type: Date, required: false },
+      end_time: { type: Date, requierd: false },
+      content_id: { type: String, required: false },
+      createdAt: { type: Date, required: false },
     },
   ],
 });
