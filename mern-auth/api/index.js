@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+// connect to mongodb
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
