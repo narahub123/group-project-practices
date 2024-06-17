@@ -1,4 +1,3 @@
-import { timeStamp } from "console";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -18,7 +17,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timeStamp: true } // each user has two extra information : time of creation and added
+  { timestamps: true } // each user has two extra information : time of creation and added
 );
 
 const User = mongoose.model("User", userSchema);
