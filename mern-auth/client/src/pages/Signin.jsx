@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../redux/user/userSlice";
 
 const Signin = () => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+
+  const { loading, error } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
 
@@ -15,9 +23,7 @@ const Signin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
-    setError(false);
-
+    dispatch(signInStart());
     // create request
     const res = await fetch(`/api/auth/signin`, {
       method: "POST",
@@ -30,13 +36,13 @@ const Signin = () => {
     // response from backend
     const data = await res.json();
 
-    setLoading(false);
-
     // error-handling for fetch
     if (data.success === false) {
-      setError(true);
+      dispatch(signInFailure(data));
+
       return;
     }
+    dispatch(signInSuccess(data));
 
     navigate("/");
   };
@@ -72,7 +78,9 @@ const Signin = () => {
           <span className="text-blue-500">Sign up</span>
         </Link>
       </div>
-      {error && <p className="text-red-700 mt-5">Somthing went wrong</p>}
+      <p className="text-red-700 mt-5">
+        {error ? error.message || `Somthing went wrong` : ""}
+      </p>
     </div>
   );
 };
