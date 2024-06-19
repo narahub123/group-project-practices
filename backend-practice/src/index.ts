@@ -12,7 +12,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://192.168.23.135:3000", "http://localhost:3000"],
+    origin: [
+      "http://192.168.23.135:3000",
+      "http://localhost:3000",
+      "https://tripitnow.netlify.app",
+    ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
