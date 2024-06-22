@@ -1,7 +1,7 @@
 import "./choice.css";
 
 const Choice = () => {
-  return <div>Choice</div>;
+  return <div className="choice">Choice</div>;
 };
 
 export default Choice;

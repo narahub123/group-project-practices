@@ -1,7 +1,7 @@
 import "./procedure.css";
 
 const Procedure = () => {
-  return <div>Procedure</div>;
+  return <div className="procedure">Procedure</div>;
 };
 
 export default Procedure;

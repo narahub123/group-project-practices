@@ -1,3 +1,10 @@
 .layout {
   display: flex;
+  padding: 10px;
+  width: 100%;
+  /* justify-content: space-between; */
+  .edge {
+    border: 1px solid black;
+    cursor: col-resize;
+  }
 }

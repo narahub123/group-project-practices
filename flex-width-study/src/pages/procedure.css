@@ -1,2 +1,7 @@
 .procedure {
+  width: 70px;
+  height: 100vh;
+  padding: 10px;
+  text-align: center;
+  background-color: blueviolet;
 }

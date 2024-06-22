@@ -1,2 +1,11 @@
 .map {
+  /* width는 계산을 통해서 결정 */
+  width: var(--map-width);
+  /* padding: 10px; */
+  text-align: center;
+  background-color: bisque;
+
+  overflow: hidden;
+  flex: 1 1 0;
+  transition: width 1s ease-in-out;
 }
