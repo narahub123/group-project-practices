@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
   const { username, email, password } = req.body;
+  console.log(username, email, password);
 
   const hashedPassword = bcryptjs.hashSync(password, 10);
 
@@ -22,6 +23,7 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
+
   try {
     // validate email
     const validUser = await User.findOne({ email });
@@ -32,12 +34,12 @@ export const signin = async (req, res, next) => {
     if (!validPassword) return next(errorHandler(401, "wrong credentials"));
 
     // create token
-    const token = jwt.sign({ id: validPassword._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
 
     // destructure the value to remove password from the result
     const { password: hashedPassword, ...rest } = validUser._doc;
 
-    const expiryDate = new Date(Date.now() + 360000); // 1hour
+    const expiryDate = new Date(Date.now() + 3600000); // 1hour
 
     // put token inside cookie of client side
     res
