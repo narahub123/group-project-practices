@@ -10,10 +10,12 @@ import router from "./routers";
 
 const app = express();
 
+const ip = "172.16.1.82";
+
 app.use(
   cors({
     origin: [
-      "http://192.168.23.135:3000",
+      `http://${ip}:3000`,
       "http://localhost:3000",
       "https://tripitnow.netlify.app",
     ],
