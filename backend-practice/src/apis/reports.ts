@@ -24,3 +24,22 @@ export const getReportsById = async (userId: number) => {
 export const getAllReports = async () => {
   return ReportModel.find({});
 };
+
+// 업데이트 신고 처리
+export const updateReportById = async (id: string, reportFalse: number) => {
+  try {
+    const updateReport = ReportModel.findByIdAndUpdate(
+      id,
+      { reportFalse },
+      { new: true }
+    );
+
+    if (!updateReport) {
+      throw new Error(`아이디를 찾을 수 없습니다.`);
+    }
+
+    return updateReport;
+  } catch (error) {
+    console.log(error);
+  }
+};

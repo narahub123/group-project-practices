@@ -3,6 +3,7 @@ import {
   createReportByValue,
   getAllReports,
   getReportsById,
+  updateReportById,
 } from "../apis/reports";
 
 // 신고 등록하기
@@ -61,6 +62,28 @@ export const getAllReportsForAdmin = async (
   try {
     const reports = await getAllReports();
     return res.status(200).json(reports);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+
+export const updateReport = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const { id, reportFalse } = req.body;
+
+    console.log(id);
+
+    console.log(reportFalse);
+
+    const response = await updateReportById(id, reportFalse);
+
+    console.log(response);
+
+    return res.status(200).json(response);
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
