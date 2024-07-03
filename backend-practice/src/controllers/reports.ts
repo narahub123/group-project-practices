@@ -1,5 +1,9 @@
 import express from "express";
-import { createReportByValue, getReportsById } from "../apis/reports";
+import {
+  createReportByValue,
+  getAllReports,
+  getReportsById,
+} from "../apis/reports";
 
 // 신고 등록하기
 export const createReport = async (
@@ -43,6 +47,19 @@ export const getAllReportsById = async (
 
     const reports = await getReportsById(Number(userId));
 
+    return res.status(200).json(reports);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+
+export const getAllReportsForAdmin = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const reports = await getAllReports();
     return res.status(200).json(reports);
   } catch (error) {
     console.log(error);

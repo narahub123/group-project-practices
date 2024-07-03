@@ -15,7 +15,12 @@ export const createReportByValue = async (value: Record<string, any>) => {
   }
 };
 
-// 신고 목록
+// 자신의 신고 목록
 export const getReportsById = async (userId: number) => {
   return ReportModel.find({ userId });
+};
+
+// 신고 목록 전체
+export const getAllReports = async () => {
+  return ReportModel.find({});
 };
