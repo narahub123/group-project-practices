@@ -8,8 +8,9 @@ export const ReportSchema = new mongoose.Schema({
   msgId: { type: String, required: false },
   postId: { type: String, required: false },
   userId: { type: Number, required: true },
+  reportedUserId: { type: Number, required: true },
   reportCate: { type: String, required: true },
-  reportDetail: { type: String, required: true, null: true },
+  reportDetail: { type: String, default: "신고 상세 미제공" },
   reportDate: { type: String, required: true },
   reportFalse: { type: Number, required: true },
 });

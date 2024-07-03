@@ -8,11 +8,14 @@ export const createReportByValue = async (value: Record<string, any>) => {
 
   const savedReport = await report.save();
 
-  console.log(savedReport);
-
   if (savedReport) {
     return { status: "succeed" };
   } else {
     return { status: "rejected" };
   }
+};
+
+// 신고 목록
+export const getReportsById = async (userId: number) => {
+  return ReportModel.find({ userId });
 };
