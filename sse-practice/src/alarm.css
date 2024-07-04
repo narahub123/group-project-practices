@@ -1,0 +1,29 @@
+.alarm {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 200px;
+  height: 0px;
+  visibility: hidden;
+  border: 1px solid #ccc;
+  background-color: white;
+  text-align: center;
+  line-height: 0;
+  border-radius: 10px;
+  /* transition: all 1s; */
+}
+
+.alarm-active {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 200px;
+  visibility: visible;
+  height: 100px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 10px;
+  transition: all 1s;
+}
