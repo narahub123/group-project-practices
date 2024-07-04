@@ -1,5 +1,7 @@
+import EventComponent from "./component";
+
 function App() {
-  return <div>hello</div>;
+  return <EventComponent />;
 }
 
 export default App;
