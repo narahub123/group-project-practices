@@ -73,13 +73,9 @@ export const updateReport = async (
   res: express.Response
 ) => {
   try {
-    const { id, reportFalse } = req.body;
+    const { reportId, reportFalse } = req.body;
 
-    console.log(id);
-
-    console.log(reportFalse);
-
-    const response = await updateReportById(id, reportFalse);
+    const response = await updateReportById(reportId, reportFalse);
 
     console.log(response);
 
