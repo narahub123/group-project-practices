@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
 const EventComponent = () => {
-  const [message, setMessage] = useState();
+  const [message, setMessage] = useState("boo");
 
   useEffect(() => {
-    const eventSource = new EventSource(`http://localhost:3001/events`);
+    const eventSource = new EventSource(`http://localhost:3000/events`);
 
     if (typeof EventSource !== "undefined") {
       console.log("yayy");
@@ -14,6 +14,7 @@ const EventComponent = () => {
 
     eventSource.onmessage = (event) => {
       const eventData = JSON.parse(event.data);
+      console.log(eventData);
       setMessage(eventData.message);
     };
 
