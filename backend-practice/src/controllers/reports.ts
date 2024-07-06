@@ -5,6 +5,7 @@ import {
   getReportsById,
   updateReportById,
 } from "../apis/reports";
+import { ReportModel } from "../db/reports";
 
 // 신고 등록하기
 export const createReport = async (
@@ -60,8 +61,36 @@ export const getAllReportsForAdmin = async (
   res: express.Response
 ) => {
   try {
-    const reports = await getAllReports();
+    let result = getAllReports();
+
+    const reports = await result;
+
     return res.status(200).json(reports);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+
+export const getAllReportsAdmin = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const limit = Number(req.query.limit) || 5;
+    const page = Number(req.query.page) || 1;
+
+    const skip = (page - 1) * limit;
+
+    let result = getAllReports();
+
+    const totalPages = await ReportModel.countDocuments({});
+
+    const reports = await result.skip(skip).limit(limit);
+
+    const numOfPage = Math.ceil(totalPages / limit);
+
+    return res.status(200).json({ reports, totalPages, numOfPage });
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
