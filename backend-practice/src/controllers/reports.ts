@@ -6,6 +6,7 @@ import {
   updateReportById,
 } from "../apis/reports";
 import { ReportModel } from "../db/reports";
+import { ReportType } from "types/reports";
 
 // 신고 등록하기
 export const createReport = async (
@@ -77,20 +78,25 @@ export const getAllReportsAdmin = async (
   res: express.Response
 ) => {
   try {
-    const limit = Number(req.query.limit) || 5;
-    const page = Number(req.query.page) || 1;
-
-    const skip = (page - 1) * limit;
+    const { sortKey, sortValue } = req.query;
 
     let result = getAllReports();
 
-    const totalPages = await ReportModel.countDocuments({});
+    if (sortValue === "desc") {
+      result = result.sort("-" + sortKey);
+    } else {
+      result = result.sort(sortKey.toString());
+    }
 
+    // pagination
+    const limit = Number(req.query.limit) || 5;
+    const page = Number(req.query.page) || 1;
+    const skip = (page - 1) * limit;
+
+    const totalPages = await ReportModel.countDocuments({});
     const reports = await result.skip(skip).limit(limit);
 
-    const numOfPage = Math.ceil(totalPages / limit);
-
-    return res.status(200).json({ reports, totalPages, numOfPage });
+    return res.status(200).json({ reports, totalPages });
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
