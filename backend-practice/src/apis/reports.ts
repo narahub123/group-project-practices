@@ -22,7 +22,14 @@ export const getReportsById = (userId: number) => {
 
 // 신고 목록 전체
 export const getAllReports = () => {
-  return ReportModel.find({});
+  return ReportModel.find();
+};
+
+// 신고 목록 전체
+export const getAdminAllReports = (queryObject: any) => {
+  console.log(queryObject);
+
+  return ReportModel.find(queryObject);
 };
 
 // 업데이트 신고 처리
