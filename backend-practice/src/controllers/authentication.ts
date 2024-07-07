@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createUser, getUserByEmail } from "../db/users";
+import { createUser, getUserByEmail1 } from "../db/users";
 import { authentication, random } from "../helpers";
 
 export const login = async (req: express.Request, res: express.Response) => {
@@ -11,7 +11,7 @@ export const login = async (req: express.Request, res: express.Response) => {
       return res.sendStatus(400);
     }
 
-    const user = await getUserByEmail(email).select(
+    const user = await getUserByEmail1(email).select(
       "+authentication.salt +authentication.password"
     );
 
@@ -53,7 +53,7 @@ export const register = async (req: express.Request, res: express.Response) => {
       return res.sendStatus(400);
     }
 
-    const existingUser = await getUserByEmail(email);
+    const existingUser = await getUserByEmail1(email);
 
     if (existingUser) {
       return res.sendStatus(400);
