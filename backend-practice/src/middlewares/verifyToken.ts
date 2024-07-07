@@ -7,6 +7,13 @@ export const verifyAccessToken = (
   res: express.Response,
   next: express.NextFunction
 ) => {
+  const excludedPaths = ["/login", "/join"]; // 제외할 경로들
+
+  if (excludedPaths.includes(req.path)) {
+    // login 또는 join 경로일 경우 미들웨어를 건너뜁니다.
+    return next();
+  }
+  
   const accessToken = req.cookies.access_token;
   const refreshToken = req.cookies.refresh_token;
 
@@ -30,7 +37,7 @@ export const verifyAccessToken = (
           // refresh token에 에러가 있는 경우
           if (err) {
             return res
-              .status(401)
+              .status(403)
               .json({ code: "logout", msg: "Please log in again" });
           }
 

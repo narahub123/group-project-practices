@@ -7,12 +7,11 @@ import {
   getAllReportsForAdmin,
   updateReport,
 } from "../controllers/reports";
-import { verifyAccessToken } from "../middlewares/verifyToken";
 
 export default (router: express.Router) => {
   router.post("/reports/add", createReport);
   router.get("/reports/list", getAllReportsById);
   router.get("/reports/admin", getAllReportsForAdmin);
-  router.get("/reports/admin/test", verifyAccessToken, getAllReportsAdmin);
+  router.get("/reports/admin/test", getAllReportsAdmin);
   router.post("/reports/update", updateReport);
 };

@@ -7,6 +7,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 
 import router from "./routers";
+import { verifyAccessToken } from "./middlewares/verifyToken";
 
 const app = express();
 
@@ -42,4 +43,4 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
 
-app.use("/", router());
+app.use("/", verifyAccessToken, router());
