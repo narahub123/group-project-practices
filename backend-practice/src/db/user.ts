@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
   regdate: { type: String, default: Date.now() },
   reportCount: { type: Number, default: 0 },
   userpic: { type: String, default: "" },
-  userInfo: { type: String, required: false },
+  intro: { type: String, required: false },
   endDate: { type: String, required: false },
   socialType: { type: String, required: false },
 });

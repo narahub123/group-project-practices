@@ -34,3 +34,10 @@ export const getUsers = async (userId?: string) => {
 
   return users;
 };
+
+// 프로필 업데이트
+export const updateUserProfile = (userId: string, value: any) => {
+  const newUserProfile = User.findOneAndUpdate({ userId }, value);
+
+  return newUserProfile;
+};

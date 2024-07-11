@@ -1,5 +1,5 @@
 import { verfiyRole } from "../helpers/verifyRole";
-import { getUserByUserId, getUsers } from "../apis/user";
+import { getUserByUserId, getUsers, updateUserProfile } from "../apis/user";
 import express from "express";
 
 export const getUserById = async (
@@ -32,4 +32,45 @@ export const getUsersForAdmin = async (
   console.log(users);
 
   return res.status(200).json(users);
+};
+
+// 프로필 정보
+export const getUserProfile = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const { userId } = req.user;
+
+  const user = await getUserByUserId(userId);
+
+  const { gender, userpic, intro, nickname } = user;
+
+  const userProfile = {
+    gender,
+    userpic,
+    intro,
+    nickname,
+  };
+
+  return res.status(200).json(userProfile);
+};
+
+// 프로필 업데이트
+export const updateUserProfileWithId = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const { userId } = req.user;
+
+  const { userpic, intro, nickname } = req.body;
+
+  const value = {
+    userpic,
+    intro,
+    nickname,
+  };
+
+  const newUserProfile = await updateUserProfile(userId, value);
+
+  return res.status(201).json(newUserProfile);
 };
