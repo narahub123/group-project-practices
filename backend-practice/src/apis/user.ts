@@ -1,5 +1,11 @@
 import { User } from "../db/user";
 
+export const getUserByUserId = (userId: string) => {
+  const user = User.findOne({ userId });
+
+  return user;
+};
+
 // 이메일을 통해서 유저 가져오기
 export const getUserByEmail = (email: string) => User.findOne({ email });
 
@@ -16,4 +22,10 @@ export const createUserByEmail = async (value: Record<string, any>) => {
   const savedUser = await user.save();
 
   return savedUser;
+};
+
+export const getUsers = async () => {
+  const users = User.find({});
+
+  return users;
 };

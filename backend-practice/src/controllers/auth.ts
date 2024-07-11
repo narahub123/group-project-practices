@@ -25,13 +25,13 @@ export const login = async (req: express.Request, res: express.Response) => {
       return res.status(401).json({ code: 2, msg: "wrong password" });
 
     // access token 생성
-    const accessExpiryDate = "3m";
+    const accessExpiryDate = "1h";
     const accessToken = makeAccessToken(validUser, accessExpiryDate);
 
     console.log(accessToken);
 
     // refresh token 생성
-    const refreshExpiryDate = "5m";
+    const refreshExpiryDate = "1h";
     const refreshToken = makeRefreshToken(validUser, refreshExpiryDate);
 
     res.cookie("access_token", accessToken, {

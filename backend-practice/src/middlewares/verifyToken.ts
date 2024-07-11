@@ -13,7 +13,7 @@ export const verifyAccessToken = (
     // login 또는 join 경로일 경우 미들웨어를 건너뜁니다.
     return next();
   }
-  
+
   const accessToken = req.cookies.access_token;
   const refreshToken = req.cookies.refresh_token;
 
@@ -42,7 +42,7 @@ export const verifyAccessToken = (
           }
 
           // access token 재발급
-          const accessExpiryDate = "1m";
+          const accessExpiryDate = "1h";
           const newAccessToken = makeAccessToken(user, accessExpiryDate);
 
           res.cookie("access_token", newAccessToken, {
