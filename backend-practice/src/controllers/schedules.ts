@@ -1,6 +1,5 @@
 import express from "express";
 
-import { getUserBySessionToken } from "../db/users";
 import {
   getScheduleById,
   getSchedulesById,
@@ -8,18 +7,29 @@ import {
   deleteScheduleById,
   updateScheduleById,
 } from "../apis/schedules";
+import { verifyUserRole } from "../middlewares/verifyUserRole";
 
 export const getAllSchedules = async (
   req: express.Request,
   res: express.Response
 ) => {
-  // 관리자 여부 확인
+  const { userId } = req.user;
 
-  const schedules = await getSchedulesById().sort("-" + "schedule_time");
+  console.log(userId);
+
+  let schedules;
+  // 관리자 여부 확인
+  if (verifyUserRole) {
+    schedules = await getSchedulesById().sort("-" + "schedule_time");
+  } else {
+    schedules = await getSchedulesById(userId).sort("-" + "schedule_time");
+  }
 
   if (!schedules) {
     return res.sendStatus(404);
   }
+
+  // console.log(schedules);
 
   return res.status(200).json(schedules);
 };
