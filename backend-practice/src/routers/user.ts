@@ -1,3 +1,4 @@
+import { verifyUserRole } from "../middlewares/verifyUserRole";
 import { getUserById, getUsersForAdmin } from "../controllers/user";
 import express from "express";
 

@@ -24,8 +24,13 @@ export const createUserByEmail = async (value: Record<string, any>) => {
   return savedUser;
 };
 
-export const getUsers = async () => {
-  const users = User.find({});
+export const getUsers = async (userId?: string) => {
+  let users;
+  if (userId) {
+    users = User.find({ userId });
+  } else {
+    users = User.find({});
+  }
 
   return users;
 };

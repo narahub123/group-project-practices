@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 
 import router from "./routers";
 import { verifyAccessToken } from "./middlewares/verifyToken";
+import { verifyUserRole } from "./middlewares/verifyUserRole";
 
 const app = express();
 
@@ -43,4 +44,4 @@ mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
 
-app.use("/", verifyAccessToken, router());
+app.use("/", verifyAccessToken, verifyUserRole, router());
