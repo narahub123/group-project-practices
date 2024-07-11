@@ -13,19 +13,9 @@ export const getAllSchedules = async (
   req: express.Request,
   res: express.Response
 ) => {
-  // const sessionToken = req.cookies["ANTONIO-AUTH"];
-  // if (!sessionToken) {
-  //   return res.sendStatus(403);
-  // }
+  // 관리자 여부 확인
 
-  // const existingUser = await getUserBySessionToken(sessionToken);
-
-  // const id =
-  //   existingUser._id.toString() === "관리자"
-  //     ? null
-  //     : existingUser._id.toString();
-
-  const schedules = await getSchedulesById();
+  const schedules = await getSchedulesById().sort("-" + "schedule_time");
 
   if (!schedules) {
     return res.sendStatus(404);
