@@ -6,6 +6,7 @@ import schedule from "./schedules";
 import places from "./places";
 import reports from "./reports";
 import user from "./user";
+import posts from "./posts";
 
 const router = express.Router();
 
@@ -16,6 +17,7 @@ export default (): express.Router => {
   places(router);
   reports(router);
   user(router);
+  posts(router);
 
   return router;
 };

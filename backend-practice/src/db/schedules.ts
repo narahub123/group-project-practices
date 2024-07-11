@@ -1,11 +1,11 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 export const ScheduleSchema = new mongoose.Schema({
-  schedule_id: { type: String, required: false },
+  schedule_id: { type: Schema.Types.ObjectId, required: false },
   metro_id: { type: Number, required: true },
   user_id: { type: String, required: false },
   start_date: { type: String, required: true },
-  end_date: { type: String, required: true }, // format 추가하기 
+  end_date: { type: String, required: true }, // format 추가하기
   schedule_time: { type: String, required: false },
   schedule_title: { type: String, required: true },
   schedule_details: [
