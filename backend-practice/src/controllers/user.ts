@@ -1,5 +1,11 @@
 import { verfiyRole } from "../helpers/verifyRole";
-import { getUserByUserId, getUsers, updateUserProfile } from "../apis/user";
+import bcryptjs from "bcryptjs";
+import {
+  getUserByUserId,
+  getUsers,
+  updateUser,
+  updateUserProfile,
+} from "../apis/user";
 import express from "express";
 
 export const getUserById = async (
@@ -72,5 +78,26 @@ export const updateUserProfileWithId = async (
 
   const newUserProfile = await updateUserProfile(userId, value);
 
+  console.log(newUserProfile);
+
   return res.status(201).json(newUserProfile);
+};
+
+// 유저 정보 업데이트
+export const updateUserById = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const { userId } = req.user;
+
+  const { password } = req.body;
+
+  // 패스워드 해싱하기
+  const hashedPassword = bcryptjs.hashSync(password, 10);
+
+  const newUserInfo = await updateUser(userId, hashedPassword);
+
+  console.log(newUserInfo);
+
+  return res.status(200).json(newUserInfo);
 };

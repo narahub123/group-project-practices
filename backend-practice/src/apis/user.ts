@@ -37,7 +37,16 @@ export const getUsers = async (userId?: string) => {
 
 // 프로필 업데이트
 export const updateUserProfile = (userId: string, value: any) => {
+  console.log(value);
+
   const newUserProfile = User.findOneAndUpdate({ userId }, value);
 
   return newUserProfile;
+};
+
+// 유저 업데이트
+export const updateUser = (userId: string, password: string) => {
+  const newUserInfo = User.findOneAndUpdate({ userId }, { password });
+
+  return newUserInfo;
 };
