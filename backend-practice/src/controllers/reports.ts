@@ -7,7 +7,8 @@ import {
   getAdminAllReports,
 } from "../apis/reports";
 import { ReportModel } from "../db/reports";
-import { ReportType } from "types/reports";
+import { ReportType } from "../types/reports";
+import { verfiyRole } from "../helpers/verifyRole";
 
 // 신고 등록하기
 export const createReport = async (
@@ -84,6 +85,7 @@ export const getAllReportsAdmin = async (
 ) => {
   try {
     const { sortKey, sortValue, keyword, search } = req.query;
+    const { userId, role } = req.user;
 
     const queryObject: QueryObject = {};
 
@@ -102,10 +104,18 @@ export const getAllReportsAdmin = async (
       }
     }
 
-    let result = getAdminAllReports(queryObject);
+    let result;
 
-    // sort
+    if (verfiyRole(role)) {
+      result = getAdminAllReports(queryObject);
+    } else {
+      queryObject["userId"] = userId;
+      
+      result = getAdminAllReports(queryObject);
+    }
+
     if (sortValue === "desc") {
+      // sort
       result = result.sort("-" + sortKey);
     } else {
       result = result.sort(sortKey.toString());

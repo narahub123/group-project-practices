@@ -8,18 +8,19 @@ import {
   updateScheduleById,
 } from "../apis/schedules";
 import { verifyUserRole } from "../middlewares/verifyUserRole";
+import { verfiyRole } from "../helpers/verifyRole";
 
 export const getAllSchedules = async (
   req: express.Request,
   res: express.Response
 ) => {
-  const { userId } = req.user;
+  const { userId, role } = req.user;
 
   console.log(userId);
 
   let schedules;
   // 관리자 여부 확인
-  if (verifyUserRole) {
+  if (verfiyRole(role)) {
     schedules = await getSchedulesById().sort("-" + "schedule_time");
   } else {
     schedules = await getSchedulesById(userId).sort("-" + "schedule_time");

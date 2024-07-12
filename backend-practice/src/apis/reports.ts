@@ -20,12 +20,12 @@ export const getReportsById = (userId: number) => {
   return ReportModel.find({ userId });
 };
 
-// 신고 목록 전체
+// 신고 목록 전체 (사용자)
 export const getAllReports = () => {
   return ReportModel.find();
 };
 
-// 신고 목록 전체
+// 신고 목록 전체(관리자)
 export const getAdminAllReports = (queryObject: any) => {
   console.log(queryObject);
 

@@ -1,13 +1,21 @@
+import { verfiyRole } from "../helpers/verifyRole";
 import { fetchPosts } from "../apis/posts";
 import express from "express";
 
-export const fetchPostsForAdmin = async (
+export const fetchAllPosts = async (
   req: express.Request,
   res: express.Response
 ) => {
-  // 관리자 여부 확인
+  const { role, userId } = req.user;
 
-  const posts = await fetchPosts();
+  let posts;
+
+  // 관리자 여부 확인
+  if (verfiyRole(role)) {
+    posts = await fetchPosts();
+  } else {
+    posts = await fetchPosts(userId);
+  }
 
   console.log("posts", posts);
 

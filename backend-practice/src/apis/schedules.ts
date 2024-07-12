@@ -3,6 +3,7 @@ import { ScheduleModel } from "../db/schedules";
 // 조건에 맞는 모든 일정 가져오기
 export const getSchedulesById = (user_id?: string) => {
   let schedules;
+  console.log("유저 아이디", user_id);
 
   if (user_id) {
     schedules = ScheduleModel.find({ _id: user_id });
