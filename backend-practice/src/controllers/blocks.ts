@@ -1,5 +1,5 @@
 import { verfiyRole } from "../helpers/verifyRole";
-import { fetchAllBlocks } from "../apis/blocks";
+import { addBlock, fetchAllBlocks } from "../apis/blocks";
 import express from "express";
 
 export const getBlocksForAdmin = async (
@@ -18,4 +18,16 @@ export const getBlocksForAdmin = async (
   }
 
   return res.status(200).json(blocks);
+};
+
+// 차단하기
+export const addBlockUserByUserId = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const { userId } = req.user;
+
+  const { blockedUserId } = req.body;
+
+  const block = await addBlock(userId, blockedUserId);
 };
