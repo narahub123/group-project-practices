@@ -9,8 +9,9 @@ export const getBlocksForAdmin = async (
   const { userId, role } = req.user;
   let blocks;
 
-  // 관리자 여부 확인
+  console.log(role);
 
+  // 관리자 여부 확인
   if (verfiyRole(role)) {
     blocks = await fetchAllBlocks();
   } else {
@@ -27,7 +28,7 @@ export const addBlockUserByUserId = async (
 ) => {
   const { userId } = req.user;
 
-  const { blockedUserId } = req.body;
+  const { blockedId } = req.body;
 
-  const block = await addBlock(userId, blockedUserId);
+  const block = await addBlock(userId, blockedId);
 };

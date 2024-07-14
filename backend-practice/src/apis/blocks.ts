@@ -14,10 +14,10 @@ export const fetchAllBlocks = async (userId?: string) => {
 };
 
 // 차단하기
-export const addBlock = async (userId: string, blockedUserId: string) => {
+export const addBlock = async (userId: string, blockedId: string) => {
   const value = {
     userId,
-    blockedUserId,
+    blockedId,
   };
 
   const block = new Block(value);
