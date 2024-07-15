@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { User } from "../db/user";
 
 export const getUserByUserId = (userId: string) => {
@@ -17,11 +18,22 @@ export const getUserByNickname = (nickname: string) =>
 export const createUserByEmail = async (value: Record<string, any>) => {
   console.log(value);
 
-  const user = new User(value);
+  const userId = new mongoose.Types.ObjectId();
 
-  const savedUser = await user.save();
+  const user = new User({
+    ...value,
+    userId,
+    _id: userId,
+  });
 
-  return savedUser;
+  console.log(user);
+  try {
+    const savedUser = await user.save();
+
+    return savedUser;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getUsers = async (userId?: string) => {
@@ -33,6 +45,15 @@ export const getUsers = async (userId?: string) => {
   }
 
   return users;
+};
+
+// 닉네임 가져오기
+export const getNickname = async (userId: string) => {
+  const user = await User.findOne({ userId });
+
+  const nickname = user.nickname;
+
+  return nickname;
 };
 
 // 프로필 업데이트

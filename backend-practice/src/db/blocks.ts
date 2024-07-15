@@ -3,17 +3,17 @@ import mongoose, { Schema, Types } from "mongoose";
 const BlockSchema = new mongoose.Schema({
   blockId: {
     type: Schema.Types.ObjectId,
-    default: function () {
-      return new Types.ObjectId();
-    },
+    required: true,
   },
   userId: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
+    ref: "User",
   },
   blockedId: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
+    ref: "User",
   },
   blockDate: {
     type: Date,

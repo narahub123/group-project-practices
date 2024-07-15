@@ -1,30 +1,52 @@
+import mongoose, { ObjectId } from "mongoose";
 import { Block } from "../db/blocks";
+import { User } from "../db/user";
 
 // 차단 목록 가져오기
 export const fetchAllBlocks = async (userId?: string) => {
+  console.log(userId);
+
   let blocks;
   // 관리자 여부 확인 코드
   if (userId) {
-    blocks = Block.find({ userId });
+    blocks = await Block.find({ userId })
+      .populate("userId", "nickname")
+      .populate("blockedId", "nickname");
   } else {
-    blocks = Block.find({});
+    blocks = await Block.find({})
+      .populate("userId", "userId nickname")
+      .populate("blockedId", "userId nickname");
   }
+
+  console.log("blocks api", blocks);
 
   return blocks;
 };
 
 // 차단하기
 export const addBlock = async (userId: string, blockedId: string) => {
+  console.log(blockedId);
+
+  const userInfo = await User.findOne({ userId });
+  const blockedUserInfo = await User.findOne({ userId: blockedId });
+
+  // console.log("userInfo", userInfo);
+  console.log("blockedUserInfo", blockedUserInfo);
+
+  const blockId = new mongoose.Types.ObjectId();
   const value = {
-    userId,
-    blockedId,
+    _id: blockId,
+    userId: userInfo,
+    blockedId: blockedUserInfo,
+    blockId,
   };
+
   try {
     const block = new Block(value);
 
     const addBlockUser = await block.save();
 
-    console.log(addBlockUser);
+    // console.log(addBlockUser);
 
     return addBlockUser;
   } catch (error) {

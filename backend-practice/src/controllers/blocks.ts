@@ -60,7 +60,5 @@ export const deleteBlockedUser = async (
     console.log("에러 발생");
   }
 
-  console.log("blocks", blocks);
-
   return res.status(200).json({ blocks });
 };

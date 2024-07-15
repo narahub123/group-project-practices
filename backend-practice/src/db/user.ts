@@ -3,9 +3,7 @@ import mongoose, { Schema, Types } from "mongoose";
 const UserSchema = new mongoose.Schema({
   userId: {
     type: Schema.Types.ObjectId,
-    default: function () {
-      return new Types.ObjectId();
-    },
+    required: true,
   },
   email: {
     type: String,
