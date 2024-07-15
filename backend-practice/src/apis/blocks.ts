@@ -24,6 +24,8 @@ export const addBlock = async (userId: string, blockedId: string) => {
 
     const addBlockUser = await block.save();
 
+    console.log(addBlockUser);
+
     return addBlockUser;
   } catch (error) {
     if (error.code === 11000) {
@@ -35,4 +37,17 @@ export const addBlock = async (userId: string, blockedId: string) => {
   }
 };
 
-// 차단 중복 찾기
+// 차단 해제 하기(삭제)
+export const deleteBlock = async (blockId: string) => {
+  try {
+    const response = await Block.findOneAndDelete({ blockId });
+
+    if (!response) {
+      return { code: 500, msg: "에러 발생" };
+    } else {
+      return { code: 200, msg: "삭제 완료" };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
