@@ -19,10 +19,20 @@ export const addBlock = async (userId: string, blockedId: string) => {
     userId,
     blockedId,
   };
+  try {
+    const block = new Block(value);
 
-  const block = new Block(value);
+    const addBlockUser = await block.save();
 
-  const addBlockUser = await block.save();
-
-  return addBlockUser;
+    return addBlockUser;
+  } catch (error) {
+    if (error.code === 11000) {
+      console.log("이미 차단된 사용자 입니다.");
+      return { code: 11000, msg: "중복 에러" };
+    } else {
+      console.error("사용자 차단 중 에러가 발생");
+    }
+  }
 };
+
+// 차단 중복 찾기

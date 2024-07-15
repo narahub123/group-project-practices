@@ -41,7 +41,9 @@ const MONGO_URL =
   "mongodb+srv://john:1234@nodeexpressproject.viwrjth.mongodb.net/?retryWrites=true&w=majority&appName=NodeExpressProject";
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
+mongoose.connect(MONGO_URL, {
+  autoIndex: true,
+});
 mongoose.connection.on("error", (error: Error) => console.log(error));
 
 app.use("/", verifyAccessToken, verifyUserRole, router());

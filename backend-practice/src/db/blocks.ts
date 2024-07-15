@@ -21,4 +21,6 @@ const BlockSchema = new mongoose.Schema({
   },
 });
 
+BlockSchema.index({ userId: 1, blockedId: 1 }, { unique: true });
+
 export const Block = mongoose.model("Block", BlockSchema);

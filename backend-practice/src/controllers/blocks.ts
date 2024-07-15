@@ -31,4 +31,6 @@ export const addBlockUserByUserId = async (
   const { blockedId } = req.body;
 
   const block = await addBlock(userId, blockedId);
+
+  return res.status(500).json(block);
 };
