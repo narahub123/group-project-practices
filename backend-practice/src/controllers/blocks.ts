@@ -7,16 +7,30 @@ export const getBlocksForAdmin = async (
   res: express.Response
 ) => {
   const { userId, role } = req.user;
-  let blocks;
+  const { sortKey, sortValue } = req.query;
 
-  console.log(role);
+  const key = sortKey ? sortKey.toString() : "blockDate";
+  const value = sortValue.toString();
+
+  let result;
 
   // 관리자 여부 확인
   if (verfiyRole(role)) {
-    blocks = await fetchAllBlocks();
+    result = fetchAllBlocks();
   } else {
-    blocks = await fetchAllBlocks(userId);
+    result = fetchAllBlocks(userId);
   }
+
+  // 정렬
+  if (value === "desc") {
+    result = await result.sort({ [key]: -1 });
+  } else {
+    result = await result.sort({ [key]: 1 });
+  }
+
+  let blocks = result;
+
+  console.log(blocks);
 
   return res.status(200).json(blocks);
 };

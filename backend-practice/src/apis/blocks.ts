@@ -3,22 +3,20 @@ import { Block } from "../db/blocks";
 import { User } from "../db/user";
 
 // 차단 목록 가져오기
-export const fetchAllBlocks = async (userId?: string) => {
+export const fetchAllBlocks = (userId?: string) => {
   console.log(userId);
 
   let blocks;
   // 관리자 여부 확인 코드
   if (userId) {
-    blocks = await Block.find({ userId })
+    blocks = Block.find({ userId })
       .populate("userId", "nickname")
       .populate("blockedId", "nickname");
   } else {
-    blocks = await Block.find({})
+    blocks = Block.find({})
       .populate("userId", "userId nickname")
       .populate("blockedId", "userId nickname");
   }
-
-  console.log("blocks api", blocks);
 
   return blocks;
 };
