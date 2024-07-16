@@ -4,18 +4,12 @@ import { User } from "../db/user";
 
 // 차단 목록 가져오기
 export const fetchAllBlocks = (userId?: string) => {
-  console.log(userId);
-
   let blocks;
-  // 관리자 여부 확인 코드
+
   if (userId) {
-    blocks = Block.find({ userId })
-      .populate("userId", "nickname")
-      .populate("blockedId", "nickname");
+    blocks = Block.find({ userId });
   } else {
-    blocks = Block.find({})
-      .populate("userId", "userId nickname")
-      .populate("blockedId", "userId nickname");
+    blocks = Block.find({});
   }
 
   return blocks;

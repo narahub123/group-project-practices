@@ -2,30 +2,58 @@ import { verfiyRole } from "../helpers/verifyRole";
 import { addBlock, deleteBlock, fetchAllBlocks } from "../apis/blocks";
 import express from "express";
 
+interface QueryObject {
+  [key: string]: any;
+}
+
 export const getBlocksForAdmin = async (
   req: express.Request,
   res: express.Response
 ) => {
   const { userId, role } = req.user;
-  const { sortKey, sortValue } = req.query;
+  const { sortKey, sortValue, search, keyword } = req.query;
 
   const key = sortKey ? sortKey.toString() : "blockDate";
   const value = sortValue.toString();
 
   let result;
 
+  console.log(sortKey, sortValue);
+
   // 관리자 여부 확인
   if (verfiyRole(role)) {
-    result = fetchAllBlocks();
+    // 관리자인 경우
+    result = await fetchAllBlocks()
+      .populate({
+        path: "userId",
+        select: "nickname",
+        // options: { sort: { key: value === "desc" ? -1 : 1 } },
+      })
+      .populate({
+        path: "blockedId",
+        select: "nickname",
+        // options: { sort: { key: value === "desc" ? -1 : 1 } },
+      })
+      .sort({
+        [key]: value === "desc" ? -1 : 1,
+      } as any);
   } else {
-    result = fetchAllBlocks(userId);
-  }
-
-  // 정렬
-  if (value === "desc") {
-    result = await result.sort({ [key]: -1 });
-  } else {
-    result = await result.sort({ [key]: 1 });
+    // 사용자인 경우
+    // 유저 아이디를 추가해서 해당 아이디를 가진 목록만 반환
+    result = await fetchAllBlocks(userId)
+      .populate({
+        path: "userId",
+        select: "nickname",
+        options: { sort: { key: value === "desc" ? -1 : 1 } },
+      })
+      .populate({
+        path: "blockedId",
+        select: "nickname",
+        options: { sort: { key: value === "desc" ? -1 : 1 } },
+      })
+      .sort({
+        [key]: value === "desc" ? -1 : 1,
+      } as any);
   }
 
   let blocks = result;
