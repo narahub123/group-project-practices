@@ -3,6 +3,7 @@ import { addBlock, deleteBlock, fetchAllBlocks } from "../apis/blocks";
 import express from "express";
 import { Block } from "../db/blocks";
 import mongoose from "mongoose";
+import { getNextDay } from "../helpers/date";
 
 interface QueryObject {
   [key: string]: any;
@@ -24,7 +25,58 @@ export const getBlocksForAdmin = async (
   keyword = keyword.toString() || "userNickname";
   search = search || "";
 
-  console.log(search, keyword);
+  console.log(typeof search);
+
+  // 날짜
+  const koreanStartDate =
+    keyword === "blockDate" && search.length !== 0
+      ? search.toString()
+      : new Date().toISOString();
+  const koreanEndDate = getNextDay(koreanStartDate);
+
+  // 검색
+  const match =
+    keyword !== "blockDate"
+      ? // Block 컬렉션에서 주어진 userId와 일치하는 document를 찾음
+        {
+          $match: {
+            userId: new mongoose.Types.ObjectId(userId),
+            [keyword]: { $regex: search },
+          },
+        }
+      : {
+          $match: {
+            userId: new mongoose.Types.ObjectId(userId),
+            $expr: {
+              $and: [
+                {
+                  $gte: [
+                    "$blockDate",
+                    {
+                      $dateFromString: {
+                        dateString: koreanStartDate,
+                        format: "%Y-%m-%d",
+                        timezone: "Asia/Seoul",
+                      },
+                    },
+                  ],
+                },
+                {
+                  $lt: [
+                    "$blockDate",
+                    {
+                      $dateFromString: {
+                        dateString: koreanEndDate,
+                        format: "%Y-%m-%d",
+                        timezone: "Asia/Seoul",
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        };
 
   // 관리자 여부 확인
   if (verfiyRole(role)) {
@@ -35,13 +87,6 @@ export const getBlocksForAdmin = async (
     try {
       // aggregate
       result = await Block.aggregate([
-        // Block 컬렉션에서 주어진 userId와 일치하는 document를 찾음
-        {
-          $match: {
-            userId: new mongoose.Types.ObjectId(userId),
-          },
-        },
-
         // users 컬렉션과 조인하여 userId 필드를 기준으로 currentUser 필드에
         // 매칭된 닉네임 추가
         {
@@ -73,6 +118,9 @@ export const getBlocksForAdmin = async (
           },
         },
 
+        // 검색
+        match,
+
         // 정렬
         {
           $sort: {
@@ -84,35 +132,10 @@ export const getBlocksForAdmin = async (
       console.log(error);
     }
   }
+
   console.log("result", result);
-  console.log("keyword", keyword);
-  console.log("search", search);
 
-  // 검색 
-  let blocks =
-    keyword !== "blockDate"
-      ? result.filter((block) => {
-          return block[keyword][0].includes(search);
-        })
-      : result.filter((block) => {
-          const blockDate = new Date(block[keyword]);
-
-          const year = blockDate.getFullYear();
-          const month = (blockDate.getMonth() + 1).toString().padStart(2, "0");
-          const date = blockDate.getDate();
-          const blockString = `${year}-${month}-${date}`;
-
-          const comparison = search
-            ? new Date(blockString).getTime() ===
-              new Date(search.toString()).getTime()
-            : true;
-
-          return comparison;
-        });
-
-  console.log("result", blocks);
-
-  return res.status(200).json(blocks);
+  return res.status(200).json(result);
 };
 
 // 차단하기
