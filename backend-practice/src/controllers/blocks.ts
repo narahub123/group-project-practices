@@ -5,10 +5,6 @@ import { Block } from "../db/blocks";
 import mongoose from "mongoose";
 import { getNextDay } from "../helpers/date";
 
-interface QueryObject {
-  [key: string]: any;
-}
-
 export const getBlocksForAdmin = async (
   req: express.Request,
   res: express.Response
@@ -78,6 +74,12 @@ export const getBlocksForAdmin = async (
           },
         };
 
+  // 페이징
+  // pagination
+  const limit = Number(req.query.limit);
+  const page = Number(req.query.page) || 1;
+  const skip = (page - 1) * limit;
+
   // 관리자 여부 확인
   if (verfiyRole(role)) {
     // 관리자인 경우
@@ -125,6 +127,20 @@ export const getBlocksForAdmin = async (
         {
           $sort: {
             [key]: value === "desc" ? -1 : 1,
+          },
+        },
+
+        {
+          $facet: {
+            blocks: [
+              {
+                $skip: skip,
+              },
+              {
+                $limit: limit,
+              },
+            ],
+            totalBlocks: [{ $count: "count" }],
           },
         },
       ]).exec();
