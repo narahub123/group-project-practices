@@ -84,6 +84,13 @@ export const getBlocksForAdmin = async (
             blockedUserNickname: "$blockedUser.nickname",
           },
         },
+
+        // 정렬
+        {
+          $sort: {
+            [key]: value === "desc" ? -1 : 1,
+          },
+        },
       ]).exec();
     } catch (error) {
       console.log(error);
@@ -92,12 +99,6 @@ export const getBlocksForAdmin = async (
 
   console.log("result1", result);
   console.log("key", key);
-
-  // result = await result.sort({
-  //   "blockedId.nickname": 1,
-  // } as any);
-
-  // console.log("result2", result);
 
   let blocks = result;
 
@@ -112,6 +113,11 @@ export const addBlockUserByUserId = async (
   const { userId } = req.user;
 
   const { blockedId } = req.body;
+
+  // 자기 자신을 차단하려는 경우
+  if (userId === blockedId) {
+    return res.status(400).json({ code: "1", msg: "SELF_BLOCK" });
+  }
 
   const block = await addBlock(userId, blockedId);
 
