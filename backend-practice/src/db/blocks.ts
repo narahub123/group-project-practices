@@ -8,12 +8,10 @@ const BlockSchema = new mongoose.Schema({
   userId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "User",
   },
   blockedId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: "User",
   },
   blockDate: {
     type: Date,
